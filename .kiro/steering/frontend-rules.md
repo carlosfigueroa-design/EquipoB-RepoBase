@@ -64,7 +64,68 @@ export class MyComponent {
 
 ## Design System: @seguros-bolivar/ui-bundle
 
-The `@seguros-bolivar/ui-bundle` library is the primary design system. It is loaded globally via `angular.json` (CSS as first stylesheet, JS in scripts). The HTML root has `data-brand="seguros-bolivar"` and `data-theme="light"`.
+The `@seguros-bolivar/ui-bundle` library is the primary design system for this project.
+
+### Brand & Theme Configuration
+
+- Brand: `seguros-bolivar`
+- Theme: `light`
+- CSS file: `node_modules/@seguros-bolivar/ui-bundle/dist/sb-ui-seguros-bolivar-light.min.css`
+- JS file: `node_modules/@seguros-bolivar/ui-bundle/dist/sb-ui-components.min.js`
+
+### angular.json Configuration
+
+The bundle CSS must be the FIRST entry in `styles` and the JS in `scripts`:
+
+```json
+{
+  "architect": {
+    "build": {
+      "options": {
+        "styles": [
+          "node_modules/@seguros-bolivar/ui-bundle/dist/sb-ui-seguros-bolivar-light.min.css",
+          "src/styles.scss"
+        ],
+        "scripts": [
+          "node_modules/@seguros-bolivar/ui-bundle/dist/sb-ui-components.min.js"
+        ]
+      }
+    }
+  }
+}
+```
+
+### index.html Configuration
+
+The `<html>` tag MUST include `data-brand` and `data-theme` attributes:
+
+```html
+<!doctype html>
+<html lang="es" data-brand="seguros-bolivar" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>App - Seguros Bolívar</title>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+```
+
+### Web Components in Angular
+
+To use Web Components (`<sb-ui-datepicker>`, `<sb-ui-modal>`, etc.) in Angular templates, add `CUSTOM_ELEMENTS_SCHEMA` to the component:
+
+```typescript
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+@Component({
+  standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  // ...
+})
+```
 
 ### Token Priority
 
