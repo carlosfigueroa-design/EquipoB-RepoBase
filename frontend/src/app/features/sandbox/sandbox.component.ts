@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { RequestBuilderComponent } from './request-builder.component';
 import { ResponseViewerComponent } from './response-viewer.component';
 import { SandboxService } from '../../core/services/sandbox.service';
@@ -25,6 +26,7 @@ import { SandboxRequest, SandboxResponse, SandboxHistoryEntry } from '../../core
             <app-request-builder
               [apis]="apis"
               [loading]="loading"
+              [preselectedApiId]="preselectedApiId"
               (executeRequest)="onExecute($event)">
             </app-request-builder>
           </div>
@@ -177,13 +179,27 @@ export class SandboxComponent implements OnInit {
   history: SandboxHistoryEntry[] = [];
   loading = false;
   selectedHistoryIndex = -1;
+  preselectedApiId = '';
 
   constructor(
     private sandboxService: SandboxService,
     private catalogService: CatalogService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
+    // Read preselected API from navigation state
+    const nav = this.router.getCurrentNavigation();
+    const state = nav?.extras?.state as { apiId?: string } | undefined;
+    if (state?.apiId) {
+      this.preselectedApiId = state.apiId;
+    } else {
+      const historyState = history.state as { apiId?: string } | undefined;
+      if (historyState?.apiId) {
+        this.preselectedApiId = historyState.apiId;
+      }
+    }
+
     this.catalogService.getPublicApis().subscribe({
       next: (apis) => this.apis = apis,
       error: () => this.apis = [],

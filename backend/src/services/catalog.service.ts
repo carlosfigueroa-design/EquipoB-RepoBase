@@ -37,13 +37,34 @@ export class CatalogService {
     return api;
   }
 
-  /** Returns the OpenAPI spec for a given API */
+  /** Returns the OpenAPI spec for a given API. Returns null if no spec file is configured. */
   async getSpec(apiId: string): Promise<unknown> {
     const apis = await this.store.read<ApiCatalogItem[]>('apis.json');
     const api = apis.find((a) => a.id === apiId);
 
     if (!api) {
       return null;
+    }
+
+    if (!api.specFile) {
+      // No spec file configured — return a minimal auto-generated spec
+      return {
+        openapi: '3.0.3',
+        info: {
+          title: api.name,
+          version: api.version || '1.0.0',
+          description: api.description,
+          contact: {
+            name: api.contactTeam.teamName,
+            email: api.contactTeam.email,
+          },
+        },
+        servers: [
+          { url: 'https://sandbox.segurosbolivar.com/v1', description: 'Sandbox' },
+        ],
+        paths: {},
+        components: {},
+      };
     }
 
     return this.store.readSpec(api.specFile);
