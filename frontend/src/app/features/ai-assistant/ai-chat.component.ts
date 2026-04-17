@@ -57,8 +57,8 @@ interface ChatMessage {
 
               @if (!msg.typing && msg.aiResponse?.relatedApiId) {
                 <div class="message-extras">
-                  <a class="api-link" (click)="navigateToSwagger(msg.aiResponse!.relatedApiId!)">
-                    <i class="fa fa-book"></i> Ver documentación de {{ msg.aiResponse!.relatedApiName || 'API relacionada' }}
+                  <a class="api-link" (click)="navigateToApiDetail(msg.aiResponse!.relatedApiId!)">
+                    <i class="fa fa-book"></i> Ver detalle de {{ msg.aiResponse!.relatedApiName || 'API relacionada' }}
                   </a>
                   @if (msg.aiResponse!.curlExample) {
                     <div class="curl-block">
@@ -210,8 +210,8 @@ export class AiChatComponent implements OnDestroy {
     });
   }
 
-  navigateToSwagger(apiId: string): void {
-    this.router.navigate(['/swagger', apiId]);
+  navigateToApiDetail(apiId: string): void {
+    this.router.navigate(['/catalog', apiId]);
   }
 
   copyCurl(curl: string): void {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiCatalogItem } from '../../core/models/api-catalog.model';
@@ -109,9 +109,10 @@ import { HttpMethod, SandboxRequest } from '../../core/models/sandbox.model';
     }
   `]
 })
-export class RequestBuilderComponent implements OnInit {
+export class RequestBuilderComponent implements OnInit, OnChanges {
   @Input() apis: ApiCatalogItem[] = [];
   @Input() loading = false;
+  @Input() preselectedApiId = '';
   @Output() executeRequest = new EventEmitter<SandboxRequest>();
 
   selectedApiId = '';
@@ -258,7 +259,18 @@ export class RequestBuilderComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    // defaults
+    // If a preselected API was passed, auto-fill after APIs load
+    if (this.preselectedApiId) {
+      this.selectedApiId = this.preselectedApiId;
+      this.onApiChange();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['preselectedApiId'] && this.preselectedApiId && !this.selectedApiId) {
+      this.selectedApiId = this.preselectedApiId;
+      this.onApiChange();
+    }
   }
 
   onApiChange(): void {

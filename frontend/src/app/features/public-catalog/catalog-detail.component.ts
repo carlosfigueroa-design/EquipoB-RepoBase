@@ -91,6 +91,10 @@ import { ApiCatalogItem } from '../../core/models/api-catalog.model';
                   <span class="contact-label">Área:</span>
                   <span class="contact-value">{{ api.contactTeam.area }}</span>
                 </div>
+                <a class="sb-ui-button sb-ui-button--sm sb-ui-button--outline contact-btn"
+                   [href]="'mailto:' + api.contactTeam.email + '?subject=Consulta sobre ' + api.name">
+                  <i class="fa fa-envelope"></i> Contactar al equipo
+                </a>
               </div>
             </section>
           </div>
@@ -296,6 +300,15 @@ import { ApiCatalogItem } from '../../core/models/api-catalog.model';
 
     .contact-email:hover {
       text-decoration: underline;
+    }
+
+    .contact-btn {
+      margin-top: 8px;
+      align-self: flex-start;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .detail-actions {
