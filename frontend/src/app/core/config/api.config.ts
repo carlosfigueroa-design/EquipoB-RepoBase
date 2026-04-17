@@ -24,4 +24,8 @@ export const API_CONFIG = {
     changeStatus: (id: string) => `/v1/api/apis/${id}/status`,
     audit: (id: string) => `/v1/api/apis/${id}/audit`,
   },
+  analytics: {
+    dashboard: '/v1/api/analytics/dashboard',
+    events: '/v1/api/analytics/events',
+  },
 };

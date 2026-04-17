@@ -4,6 +4,7 @@ import authRoutes from './auth.routes';
 import sandboxRoutes from './sandbox.routes';
 import aiRoutes from './ai.routes';
 import lifecycleRoutes from './lifecycle.routes';
+import analyticsRoutes from './analytics.routes';
 import { authMiddleware } from '../../middleware/auth.middleware';
 
 /**
@@ -17,6 +18,7 @@ export function registerRoutes(app: Express): void {
   app.use('/v1/api/auth', authRoutes);
   app.use('/v1/api/sandbox', sandboxRoutes);
   app.use('/v1/api/ai', aiRoutes);
+  app.use('/v1/api/analytics', analyticsRoutes);
 
   // --- Auth middleware for all protected routes ---
   app.use('/v1/api', authMiddleware);

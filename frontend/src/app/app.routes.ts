@@ -55,5 +55,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/api-management/api-create.component').then((m) => m.ApiCreateComponent),
   },
+  {
+    path: 'admin/analytics',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/analytics/analytics-dashboard.component').then((m) => m.AnalyticsDashboardComponent),
+  },
   { path: '**', redirectTo: 'catalog' },
 ];

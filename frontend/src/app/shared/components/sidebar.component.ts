@@ -36,6 +36,12 @@ import { AuthService } from '../../core/services/auth.service';
               <span>Administración</span>
             </a>
           </li>
+          <li>
+            <a routerLink="/admin/analytics" routerLinkActive="active" class="nav-link">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Analítica</span>
+            </a>
+          </li>
         </ng-container>
       </ul>
 

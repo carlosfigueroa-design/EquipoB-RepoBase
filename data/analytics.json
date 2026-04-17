@@ -1,0 +1,47 @@
+{
+  "visits": [
+    { "date": "2026-04-11", "count": 142, "uniqueUsers": 89 },
+    { "date": "2026-04-12", "count": 178, "uniqueUsers": 112 },
+    { "date": "2026-04-13", "count": 95, "uniqueUsers": 61 },
+    { "date": "2026-04-14", "count": 203, "uniqueUsers": 134 },
+    { "date": "2026-04-15", "count": 187, "uniqueUsers": 118 },
+    { "date": "2026-04-16", "count": 221, "uniqueUsers": 145 },
+    { "date": "2026-04-17", "count": 198, "uniqueUsers": 127 }
+  ],
+  "devices": [
+    { "type": "Desktop", "percentage": 62.3, "count": 856 },
+    { "type": "Mobile", "percentage": 28.1, "count": 386 },
+    { "type": "Tablet", "percentage": 9.6, "count": 132 }
+  ],
+  "engagement": {
+    "avgTimeOnSite": 245,
+    "pagesPerSession": 4.2,
+    "bounceRate": 32.5,
+    "returningUsers": 41.8
+  },
+  "business": {
+    "apiCallsTotal": 12847,
+    "apiCallsTrend": [
+      { "date": "2026-04-11", "count": 1523 },
+      { "date": "2026-04-12", "count": 1891 },
+      { "date": "2026-04-13", "count": 1102 },
+      { "date": "2026-04-14", "count": 2134 },
+      { "date": "2026-04-15", "count": 1978 },
+      { "date": "2026-04-16", "count": 2245 },
+      { "date": "2026-04-17", "count": 1974 }
+    ],
+    "topApis": [
+      { "apiId": "api-001", "name": "Cotización de Seguros", "calls": 3421, "percentage": 26.6 },
+      { "apiId": "api-002", "name": "Emisión de Pólizas", "calls": 2876, "percentage": 22.4 },
+      { "apiId": "api-003", "name": "Consulta de Siniestros", "calls": 2198, "percentage": 17.1 },
+      { "apiId": "api-004", "name": "Gestión de Clientes", "calls": 1854, "percentage": 14.4 },
+      { "apiId": "api-005", "name": "Pagos y Recaudos", "calls": 1312, "percentage": 10.2 }
+    ],
+    "sandboxAdoption": {
+      "totalExecutions": 4523,
+      "uniqueDevelopers": 67,
+      "avgExecutionsPerDev": 67.5
+    }
+  },
+  "events": []
+}
