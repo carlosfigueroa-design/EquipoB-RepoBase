@@ -10,7 +10,7 @@ export const OTP_CODE = '123456';
 export const PORT = 3000;
 
 /** Base directory for JSON data files */
-export const DATA_DIR = path.join(__dirname, '../../data');
+export const DATA_DIR = path.join(__dirname, '../../../data');
 
 /** Paths to individual JSON data files */
 export const DATA_FILES = {
