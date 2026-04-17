@@ -141,6 +141,52 @@ export class RequestBuilderComponent implements OnInit {
       polizaId: 'POL-2024-001234',
       tipoConsulta: 'detalle'
     }, null, 2),
+    'api-011': JSON.stringify({
+      recepcionId: 'REC-2025-001234',
+      ordenCompraId: 'OC-2025-005678',
+      motivo: 'Recepción duplicada',
+      usuario: 'jperez@segurosbolivar.com'
+    }, null, 2),
+    'api-012': JSON.stringify({
+      proveedor: { nit: '900123456-1', razonSocial: 'Proveedor ABC S.A.S' },
+      lineas: [{ descripcion: 'Servicio de consultoría TI', cantidad: 1, valorUnitario: 15000000, centroCosto: 'CC-TEC-001' }],
+      moneda: 'COP',
+      fechaEntrega: '2025-05-15'
+    }, null, 2),
+    'api-013': JSON.stringify({
+      ordenCompraId: 'OC-2025-005678',
+      respuesta: 'ACEPTADA',
+      observaciones: 'Orden aceptada. Entrega programada para el 15 de mayo.',
+      fechaCompromisoEntrega: '2025-05-15'
+    }, null, 2),
+    'api-014': JSON.stringify({
+      presupuestoId: 'PPTO-2025-003456',
+      respuesta: 'APROBADO',
+      montoAprobado: 25000000,
+      centroCosto: 'CC-TEC-001',
+      observaciones: 'Presupuesto aprobado para Q2 2025'
+    }, null, 2),
+    'api-015': JSON.stringify({
+      recepcionId: 'REC-2025-001234',
+      ordenCompraId: 'OC-2025-005678',
+      tipoRecepcion: 'TOTAL',
+      cantidadRecibida: 1,
+      observaciones: 'Servicio recibido a satisfacción'
+    }, null, 2),
+    'api-016': JSON.stringify({
+      tipoServicio: 'CONSULTORIA',
+      proveedor: { nit: '900123456-1', razonSocial: 'Proveedor ABC S.A.S' },
+      descripcion: 'Consultoría en transformación digital',
+      valorTotal: 45000000,
+      centroCosto: 'CC-TEC-001',
+      fechaInicio: '2025-05-01',
+      fechaFin: '2025-08-31'
+    }, null, 2),
+    'api-017': JSON.stringify({
+      centroCosto: 'CC-TEC-001',
+      anio: 2025,
+      estado: 'APROBADO'
+    }, null, 2),
   };
 
   private exampleEndpoints: Record<string, string> = {
@@ -152,6 +198,13 @@ export class RequestBuilderComponent implements OnInit {
     'api-006': '/v1/polizas/consultar',
     'api-007': '/v1/polizas/cancelar',
     'api-008': '/v1/pagos/consultar',
+    'api-011': '/api/v1/coupa/anularRecepcion',
+    'api-012': '/api/v1/coupa/ordenesCompras',
+    'api-013': '/procurementprocesocompra/v1/respuestaOrdenCompra',
+    'api-014': '/procurementprocesofinanciero/v1/respuestaPresupuesto',
+    'api-015': '/procurementprocesocompra/v1/respuestaRecepciones',
+    'api-016': '/procurementprocesocompra/v1/servicioOrdenCompra',
+    'api-017': '/procurementprocesofinanciero/v1/consultarPresupuesto',
   };
 
   ngOnInit(): void {

@@ -11,18 +11,23 @@ import { AuthService } from '../../core/services/auth.service';
     <header class="app-header">
       <div class="header-left">
         <a routerLink="/catalog" class="header-brand">
-          <i class="fa-solid fa-shield-halved brand-icon"></i>
-          <span class="brand-name">Portal de APIs — SIOP</span>
+          <img src="assets/logo-seguros-bolivar.png" alt="Seguros Bolívar" class="brand-logo" />
+          <span class="brand-divider"></span>
+          <span class="brand-name">Vínculo Bolívar</span>
         </a>
       </div>
 
       <div class="header-right">
         <ng-container *ngIf="authService.isAuthenticated(); else loginTpl">
           <span class="user-info">
-            <i class="fa-solid fa-user-circle"></i>
-            {{ authService.getProfile()?.email }}
-            <span class="user-role sb-ui-badge sb-ui-badge--info">
-              {{ authService.getProfile()?.role }}
+            <span class="user-avatar">
+              <i class="fa-solid fa-user"></i>
+            </span>
+            <span class="user-details">
+              <span class="user-email">{{ authService.getProfile()?.email }}</span>
+              <span class="user-role sb-ui-badge sb-ui-badge--info">
+                {{ authService.getProfile()?.role }}
+              </span>
             </span>
           </span>
           <button class="sb-ui-button sb-ui-button--sm sb-ui-button--outline header-logout-btn" (click)="logout()">
@@ -43,10 +48,10 @@ import { AuthService } from '../../core/services/auth.service';
       align-items: center;
       justify-content: space-between;
       padding: 0 var(--sb-ui-spacing-lg, 24px);
-      height: 56px;
-      background-color: var(--sb-ui-color-primary, #003b7a);
-      color: var(--sb-ui-text-light, #ffffff);
-      box-shadow: var(--sb-ui-shadow-sm, 0 1px 3px rgba(0,0,0,0.08));
+      height: 64px;
+      background: linear-gradient(135deg, var(--sb-ui-color-primary, #007A3D) 0%, var(--sb-ui-color-primary-light, #009648) 100%);
+      color: var(--sb-ui-text-light, #FFFFFF);
+      box-shadow: 0 2px 8px rgba(0, 122, 61, 0.2);
       position: sticky;
       top: 0;
       z-index: 200;
@@ -55,16 +60,33 @@ import { AuthService } from '../../core/services/auth.service';
     .header-brand {
       display: flex;
       align-items: center;
-      gap: var(--sb-ui-spacing-sm, 8px);
-      color: var(--sb-ui-text-light, #ffffff);
+      gap: 12px;
+      color: var(--sb-ui-text-light, #FFFFFF);
       text-decoration: none;
       font-weight: 700;
       font-size: var(--sb-ui-font-size-lg, 1.25rem);
     }
 
-    .header-brand:hover { text-decoration: none; opacity: 0.9; }
+    .header-brand:hover { text-decoration: none; opacity: 0.95; }
 
-    .brand-icon { font-size: 1.4rem; }
+    .brand-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 28px;
+      background-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .brand-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
 
     .header-right {
       display: flex;
@@ -75,22 +97,56 @@ import { AuthService } from '../../core/services/auth.service';
     .user-info {
       display: flex;
       align-items: center;
+      gap: 10px;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .user-details {
+      display: flex;
+      align-items: center;
       gap: var(--sb-ui-spacing-sm, 8px);
+    }
+
+    .user-email {
       font-size: var(--sb-ui-font-size-sm, 0.875rem);
     }
 
     .user-role { font-size: var(--sb-ui-font-size-xs, 0.75rem); }
 
     .header-logout-btn {
-      border-color: var(--sb-ui-text-light, #ffffff);
-      color: var(--sb-ui-text-light, #ffffff);
+      border-color: rgba(255, 255, 255, 0.6);
+      color: var(--sb-ui-text-light, #FFFFFF);
+      transition: all 0.2s ease;
     }
     .header-logout-btn:hover {
-      background-color: rgba(255,255,255,0.15);
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: var(--sb-ui-text-light, #FFFFFF);
     }
 
     .header-login-btn {
-      background-color: var(--sb-ui-color-secondary, #00a651);
+      background-color: var(--sb-ui-color-secondary, #F5A800);
+      color: var(--sb-ui-color-grayscale-D400, #282828);
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .header-login-btn:hover {
+      background-color: var(--sb-ui-color-secondary-light, #FFC233);
+    }
+
+    @media (max-width: 768px) {
+      .brand-name { display: none; }
+      .brand-divider { display: none; }
+      .user-email { display: none; }
     }
   `],
 })

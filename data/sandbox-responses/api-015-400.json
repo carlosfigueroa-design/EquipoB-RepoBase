@@ -1,0 +1,16 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-015-err"
+  },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "Los datos de la recepción no son válidos",
+    "statusCode": 400,
+    "details": [
+      { "field": "recepcionId", "message": "Recepción no encontrada" },
+      { "field": "tipoRecepcion", "message": "Debe ser TOTAL o PARCIAL" }
+    ]
+  }
+}

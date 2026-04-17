@@ -1,0 +1,411 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "APIs CAI - Procurement & Financiero",
+    "version": "1.0.0",
+    "description": "APIs del módulo CAI (Compras, Abastecimiento e Inventarios) de Seguros Bolívar. Integración con Coupa y CONECTA para gestión de órdenes de compra, recepciones, presupuestos y proceso financiero.",
+    "contact": {
+      "name": "Equipo CAI Procurement",
+      "email": "cai-procurement@segurosbolivar.com"
+    }
+  },
+  "servers": [
+    { "url": "https://stage-cai.segurosbolivar.com/api/v1", "description": "Stage - Coupa" },
+    { "url": "https://dev-cai-conecta.segurosbolivar.com", "description": "Dev - CONECTA" },
+    { "url": "https://stage-cai-conecta.segurosbolivar.com", "description": "Stage - CONECTA" }
+  ],
+  "paths": {
+    "/coupa/anularRecepcion": {
+      "post": {
+        "summary": "Anular recepción en Coupa",
+        "description": "Anula una recepción de compra registrada en Coupa. Reversa la recepción y actualiza el estado en el sistema de procurement.",
+        "operationId": "anularRecepcion",
+        "tags": ["Coupa"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AnularRecepcionRequest" },
+              "example": {
+                "recepcionId": "REC-2025-001234",
+                "ordenCompraId": "OC-2025-005678",
+                "motivo": "Recepción duplicada",
+                "usuario": "jperez@segurosbolivar.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Recepción anulada exitosamente",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": {
+                    "recepcionId": "REC-2025-001234",
+                    "estado": "Anulada",
+                    "fechaAnulacion": "2025-04-17T10:30:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      }
+    },
+    "/coupa/ordenesCompras": {
+      "post": {
+        "summary": "Gestionar órdenes de compra en Coupa",
+        "description": "Crea o sincroniza órdenes de compra en la plataforma Coupa, incluyendo líneas de detalle, aprobaciones y estados.",
+        "operationId": "ordenesComprasCoupa",
+        "tags": ["Coupa"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OrdenCompraRequest" },
+              "example": {
+                "proveedor": { "nit": "900123456-1", "razonSocial": "Proveedor ABC S.A.S" },
+                "lineas": [
+                  { "descripcion": "Servicio de consultoría TI", "cantidad": 1, "valorUnitario": 15000000, "centroCosto": "CC-TEC-001" }
+                ],
+                "moneda": "COP",
+                "fechaEntrega": "2025-05-15"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Orden de compra creada/sincronizada",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": {
+                    "ordenCompraId": "OC-2025-005678",
+                    "estado": "Pendiente Aprobación",
+                    "montoTotal": 15000000,
+                    "fechaCreacion": "2025-04-17T09:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      }
+    },
+    "/procurementprocesocompra/v1/respuestaOrdenCompra": {
+      "post": {
+        "summary": "Respuesta a orden de compra (CONECTA)",
+        "description": "Registra la respuesta del proveedor a una orden de compra emitida. Permite confirmar, rechazar o solicitar modificaciones.",
+        "operationId": "respuestaOrdenCompra",
+        "tags": ["CONECTA - Proceso Compra"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RespuestaOrdenCompraRequest" },
+              "example": {
+                "ordenCompraId": "OC-2025-005678",
+                "respuesta": "ACEPTADA",
+                "observaciones": "Orden aceptada. Entrega programada para el 15 de mayo.",
+                "fechaCompromisoEntrega": "2025-05-15"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Respuesta registrada exitosamente",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": {
+                    "ordenCompraId": "OC-2025-005678",
+                    "estadoRespuesta": "ACEPTADA",
+                    "fechaRegistro": "2025-04-17T11:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      }
+    },
+    "/procurementprocesofinanciero/v1/respuestaPresupuesto": {
+      "post": {
+        "summary": "Respuesta a solicitud de presupuesto",
+        "description": "Registra la respuesta a una solicitud de presupuesto en el proceso financiero. Permite aprobar, rechazar o devolver para corrección.",
+        "operationId": "respuestaPresupuesto",
+        "tags": ["CONECTA - Proceso Financiero"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RespuestaPresupuestoRequest" },
+              "example": {
+                "presupuestoId": "PPTO-2025-003456",
+                "respuesta": "APROBADO",
+                "montoAprobado": 25000000,
+                "centroCosto": "CC-TEC-001",
+                "observaciones": "Presupuesto aprobado para Q2 2025"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Respuesta de presupuesto registrada",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": {
+                    "presupuestoId": "PPTO-2025-003456",
+                    "estado": "APROBADO",
+                    "montoAprobado": 25000000,
+                    "fechaAprobacion": "2025-04-17T14:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      }
+    },
+    "/procurementprocesocompra/v1/respuestaRecepciones": {
+      "post": {
+        "summary": "Respuesta a recepciones (CONECTA)",
+        "description": "Registra la respuesta a recepciones de bienes y servicios. Permite confirmar recepción total, parcial o reportar novedades.",
+        "operationId": "respuestaRecepciones",
+        "tags": ["CONECTA - Proceso Compra"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RespuestaRecepcionRequest" },
+              "example": {
+                "recepcionId": "REC-2025-001234",
+                "ordenCompraId": "OC-2025-005678",
+                "tipoRecepcion": "TOTAL",
+                "cantidadRecibida": 1,
+                "observaciones": "Servicio recibido a satisfacción"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Respuesta de recepción registrada",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": {
+                    "recepcionId": "REC-2025-001234",
+                    "estado": "RECIBIDO_TOTAL",
+                    "fechaRecepcion": "2025-04-17T15:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      }
+    },
+    "/procurementprocesocompra/v1/servicioOrdenCompra": {
+      "post": {
+        "summary": "Servicio de orden de compra (CONECTA Stage)",
+        "description": "Gestiona órdenes de compra de servicios en el ambiente stage de CONECTA. Permite crear, actualizar y consultar órdenes de servicio.",
+        "operationId": "servicioOrdenCompra",
+        "tags": ["CONECTA - Proceso Compra"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "tipoServicio": "CONSULTORIA",
+                "proveedor": { "nit": "900123456-1", "razonSocial": "Proveedor ABC S.A.S" },
+                "descripcion": "Consultoría en transformación digital",
+                "valorTotal": 45000000,
+                "centroCosto": "CC-TEC-001",
+                "fechaInicio": "2025-05-01",
+                "fechaFin": "2025-08-31"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Orden de servicio procesada",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": {
+                    "ordenServicioId": "OS-2025-007890",
+                    "estado": "Creada",
+                    "valorTotal": 45000000,
+                    "fechaCreacion": "2025-04-17T16:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      }
+    },
+    "/procurementprocesofinanciero/v1/consultarPresupuesto": {
+      "post": {
+        "summary": "Consultar presupuesto",
+        "description": "Consulta el estado y detalle de presupuestos en el proceso financiero. Permite obtener información de presupuestos por centro de costo, partida o estado.",
+        "operationId": "consultarPresupuesto",
+        "tags": ["CONECTA - Proceso Financiero"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "centroCosto": "CC-TEC-001",
+                "anio": 2025,
+                "estado": "APROBADO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Presupuestos encontrados",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": {
+                    "presupuestos": [
+                      {
+                        "presupuestoId": "PPTO-2025-003456",
+                        "centroCosto": "CC-TEC-001",
+                        "descripcion": "Presupuesto TI Q2 2025",
+                        "montoAprobado": 25000000,
+                        "montoEjecutado": 8500000,
+                        "montoDisponible": 16500000,
+                        "estado": "APROBADO"
+                      }
+                    ],
+                    "totalRegistros": 1
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnularRecepcionRequest": {
+        "type": "object",
+        "required": ["recepcionId", "motivo"],
+        "properties": {
+          "recepcionId": { "type": "string", "example": "REC-2025-001234" },
+          "ordenCompraId": { "type": "string", "example": "OC-2025-005678" },
+          "motivo": { "type": "string", "example": "Recepción duplicada" },
+          "usuario": { "type": "string", "format": "email", "example": "jperez@segurosbolivar.com" }
+        }
+      },
+      "OrdenCompraRequest": {
+        "type": "object",
+        "required": ["proveedor", "lineas"],
+        "properties": {
+          "proveedor": {
+            "type": "object",
+            "properties": {
+              "nit": { "type": "string", "example": "900123456-1" },
+              "razonSocial": { "type": "string", "example": "Proveedor ABC S.A.S" }
+            }
+          },
+          "lineas": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "descripcion": { "type": "string" },
+                "cantidad": { "type": "integer" },
+                "valorUnitario": { "type": "number" },
+                "centroCosto": { "type": "string" }
+              }
+            }
+          },
+          "moneda": { "type": "string", "enum": ["COP", "USD"], "example": "COP" },
+          "fechaEntrega": { "type": "string", "format": "date" }
+        }
+      },
+      "RespuestaOrdenCompraRequest": {
+        "type": "object",
+        "required": ["ordenCompraId", "respuesta"],
+        "properties": {
+          "ordenCompraId": { "type": "string" },
+          "respuesta": { "type": "string", "enum": ["ACEPTADA", "RECHAZADA", "MODIFICACION"] },
+          "observaciones": { "type": "string" },
+          "fechaCompromisoEntrega": { "type": "string", "format": "date" }
+        }
+      },
+      "RespuestaPresupuestoRequest": {
+        "type": "object",
+        "required": ["presupuestoId", "respuesta"],
+        "properties": {
+          "presupuestoId": { "type": "string" },
+          "respuesta": { "type": "string", "enum": ["APROBADO", "RECHAZADO", "DEVUELTO"] },
+          "montoAprobado": { "type": "number" },
+          "centroCosto": { "type": "string" },
+          "observaciones": { "type": "string" }
+        }
+      },
+      "RespuestaRecepcionRequest": {
+        "type": "object",
+        "required": ["recepcionId", "tipoRecepcion"],
+        "properties": {
+          "recepcionId": { "type": "string" },
+          "ordenCompraId": { "type": "string" },
+          "tipoRecepcion": { "type": "string", "enum": ["TOTAL", "PARCIAL"] },
+          "cantidadRecibida": { "type": "integer" },
+          "observaciones": { "type": "string" }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string" },
+          "message": { "type": "string" },
+          "statusCode": { "type": "integer" }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Datos inválidos en la solicitud",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+            "example": {
+              "error": "VALIDATION_ERROR",
+              "message": "Los datos proporcionados no son válidos",
+              "statusCode": 400
+            }
+          }
+        }
+      }
+    }
+  }
+}

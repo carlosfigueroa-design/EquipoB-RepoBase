@@ -138,7 +138,7 @@ import { SandboxRequest, SandboxResponse, SandboxHistoryEntry } from '../../core
     }
     .history-item:hover,
     .history-item.active {
-      background: var(--sb-ui-bg-primary, #f5f7fa);
+      background: var(--sb-ui-bg-primary, #f4faf6);
     }
     .history-item-header {
       display: flex;
@@ -148,7 +148,7 @@ import { SandboxRequest, SandboxResponse, SandboxHistoryEntry } from '../../core
     .history-method {
       font-weight: 600;
       font-size: var(--sb-ui-font-size-xs, 0.75rem);
-      color: var(--sb-ui-color-primary, #003b7a);
+      color: var(--sb-ui-color-primary, #007A3D);
     }
     .history-endpoint {
       font-size: var(--sb-ui-font-size-xs, 0.75rem);

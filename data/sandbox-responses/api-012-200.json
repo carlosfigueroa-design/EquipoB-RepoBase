@@ -1,0 +1,29 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-012"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "ordenCompraId": "OC-2025-005678",
+      "estado": "Pendiente Aprobación",
+      "proveedor": {
+        "nit": "900123456-1",
+        "razonSocial": "Proveedor ABC S.A.S"
+      },
+      "montoTotal": 15000000,
+      "moneda": "COP",
+      "lineas": [
+        {
+          "descripcion": "Servicio de consultoría TI",
+          "cantidad": 1,
+          "valorUnitario": 15000000,
+          "centroCosto": "CC-TEC-001"
+        }
+      ],
+      "fechaCreacion": "2025-04-17T09:00:00Z"
+    }
+  }
+}

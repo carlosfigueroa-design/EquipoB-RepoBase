@@ -1,0 +1,16 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-011-err"
+  },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "El campo 'recepcionId' es obligatorio y debe corresponder a una recepción activa",
+    "statusCode": 400,
+    "details": [
+      { "field": "recepcionId", "message": "Campo obligatorio" },
+      { "field": "motivo", "message": "Debe indicar el motivo de anulación" }
+    ]
+  }
+}

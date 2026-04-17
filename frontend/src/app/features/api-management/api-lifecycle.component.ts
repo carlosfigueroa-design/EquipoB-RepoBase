@@ -158,10 +158,10 @@ const BADGE_CLASS: Record<string, string> = {
     .header-left p { margin: 4px 0 0; color: var(--sb-ui-text-secondary, #6c757d); font-size: var(--sb-ui-font-size-sm, .875rem) }
     .table-wrapper { padding: 0; overflow-x: auto }
     .api-name { display: flex; align-items: center; gap: 8px; font-weight: 600 }
-    .api-name i { color: var(--sb-ui-color-primary, #003b7a); width: 20px; text-align: center }
+    .api-name i { color: var(--sb-ui-color-primary, #007A3D); width: 20px; text-align: center }
     .actions-cell { display: flex; gap: 8px; flex-wrap: wrap }
     .no-actions { color: var(--sb-ui-text-muted, #adb5bd); font-size: var(--sb-ui-font-size-sm, .875rem); font-style: italic }
-    .row-selected { background: rgba(0, 59, 122, .06) !important }
+    .row-selected { background: rgba(0, 122, 61, .06) !important }
     .empty-state { text-align: center; color: var(--sb-ui-text-secondary, #6c757d); padding: 32px !important }
     .loading-state { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 48px; color: var(--sb-ui-text-secondary, #6c757d) }
     .access-denied { text-align: center; padding: 48px; color: var(--sb-ui-text-secondary, #6c757d) }

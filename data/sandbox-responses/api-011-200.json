@@ -1,0 +1,18 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-011"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "recepcionId": "REC-2025-001234",
+      "estado": "Anulada",
+      "ordenCompraId": "OC-2025-005678",
+      "fechaAnulacion": "2025-04-17T10:30:00Z",
+      "motivo": "Recepción duplicada",
+      "usuario": "jperez@segurosbolivar.com"
+    }
+  }
+}

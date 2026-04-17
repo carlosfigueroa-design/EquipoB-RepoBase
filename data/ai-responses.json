@@ -99,7 +99,7 @@
     "id": "ai-013",
     "keywords": ["catálogo", "lista", "APIs disponibles", "qué APIs", "cuáles APIs", "explorar"],
     "question": "¿Qué APIs están disponibles?",
-    "answer": "El portal cuenta con **10 APIs del dominio asegurador**: Emisión de Pólizas, Renovación de Pólizas, Consulta de Siniestros, Registro de Siniestros, Cotización de Seguros, Consulta de Pólizas, Cancelación de Pólizas, Consulta de Pagos, Autenticación de Clientes y Notificaciones. Puedes explorarlas en el catálogo público.",
+    "answer": "El portal cuenta con **17 APIs**: 10 del dominio asegurador (Emisión, Renovación, Siniestros, Cotización, Pólizas, Pagos, Cancelación, Autenticación, Notificaciones) y 7 del módulo **CAI** (Compras, Abastecimiento e Inventarios) integradas con Coupa y CONECTA. Puedes explorarlas en el catálogo público.",
     "relatedApiId": "",
     "curlExample": ""
   },
@@ -126,5 +126,37 @@
     "answer": "Para emitir un seguro de vida, utiliza la **API de Emisión de Pólizas** con el plan de tipo vida. Debes proporcionar datos del asegurado, beneficiarios y el plan seleccionado (ej: 'vida-plus' con cobertura Muerte + Incapacidad). La API valida los datos y genera la póliza con certificado digital.",
     "relatedApiId": "api-001",
     "curlExample": "curl -X POST https://sandbox.segurosbolivar.com/v1/polizas/emitir -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"asegurado\": {\"nombre\": \"Juan Pérez\", \"documento\": \"1234567890\", \"tipoDocumento\": \"CC\", \"fechaNacimiento\": \"1985-03-15\"}, \"plan\": {\"codigo\": \"vida-plus\", \"cobertura\": \"Muerte + Incapacidad\"}, \"vigencia\": {\"inicio\": \"2024-07-01\"}}'"
+  },
+  {
+    "id": "ai-017",
+    "keywords": ["CAI", "procurement", "compras", "abastecimiento", "coupa", "conecta", "orden de compra", "recepción", "presupuesto"],
+    "question": "¿Qué servicios de CAI están disponibles?",
+    "answer": "El módulo **CAI (Compras, Abastecimiento e Inventarios)** cuenta con 7 APIs integradas con Coupa y CONECTA:\n\n1. **Anular Recepción (Coupa)** — Reversar recepciones erróneas\n2. **Órdenes de Compra (Coupa)** — Crear y sincronizar OC\n3. **Respuesta Orden de Compra (CONECTA)** — Confirmar/rechazar OC\n4. **Respuesta Presupuesto (CONECTA)** — Aprobar/rechazar presupuestos\n5. **Respuesta Recepciones (CONECTA)** — Confirmar recepción de bienes\n6. **Servicio Orden de Compra (CONECTA)** — Gestión de OC de servicios\n7. **Consultar Presupuesto** — Consulta de disponibilidad presupuestal",
+    "relatedApiId": "api-012",
+    "curlExample": "curl -X POST https://stage-cai.segurosbolivar.com/api/v1/coupa/ordenesCompras -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"proveedor\": {\"nit\": \"900123456-1\", \"razonSocial\": \"Proveedor ABC S.A.S\"}, \"lineas\": [{\"descripcion\": \"Servicio de consultoría TI\", \"cantidad\": 1, \"valorUnitario\": 15000000, \"centroCosto\": \"CC-TEC-001\"}], \"moneda\": \"COP\", \"fechaEntrega\": \"2025-05-15\"}'"
+  },
+  {
+    "id": "ai-018",
+    "keywords": ["anular recepción", "reversar recepción", "anulación coupa", "recepción errónea"],
+    "question": "¿Cómo anular una recepción en Coupa?",
+    "answer": "Para anular una recepción en Coupa, utiliza la **API CAI - Anular Recepción**. Envía el ID de la recepción y el motivo de anulación. La API reversa la recepción y actualiza el estado en el sistema de procurement.",
+    "relatedApiId": "api-011",
+    "curlExample": "curl -X POST https://stage-cai.segurosbolivar.com/api/v1/coupa/anularRecepcion -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"recepcionId\": \"REC-2025-001234\", \"ordenCompraId\": \"OC-2025-005678\", \"motivo\": \"Recepción duplicada\", \"usuario\": \"jperez@segurosbolivar.com\"}'"
+  },
+  {
+    "id": "ai-019",
+    "keywords": ["orden compra", "crear orden", "OC", "compra coupa", "generar orden"],
+    "question": "¿Cómo crear una orden de compra en Coupa?",
+    "answer": "Para crear una orden de compra, utiliza la **API CAI - Órdenes de Compra (Coupa)**. Proporciona los datos del proveedor (NIT, razón social), las líneas de detalle con descripción, cantidad, valor y centro de costo. La API crea la OC en Coupa y retorna el ID y estado.",
+    "relatedApiId": "api-012",
+    "curlExample": "curl -X POST https://stage-cai.segurosbolivar.com/api/v1/coupa/ordenesCompras -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"proveedor\": {\"nit\": \"900123456-1\", \"razonSocial\": \"Proveedor ABC S.A.S\"}, \"lineas\": [{\"descripcion\": \"Servicio de consultoría TI\", \"cantidad\": 1, \"valorUnitario\": 15000000, \"centroCosto\": \"CC-TEC-001\"}], \"moneda\": \"COP\", \"fechaEntrega\": \"2025-05-15\"}'"
+  },
+  {
+    "id": "ai-020",
+    "keywords": ["presupuesto", "consultar presupuesto", "disponibilidad presupuestal", "centro de costo", "partida presupuestal"],
+    "question": "¿Cómo consultar presupuesto disponible?",
+    "answer": "Para consultar presupuestos, utiliza la **API CAI - Consultar Presupuesto**. Puedes filtrar por centro de costo, año y estado. La API retorna el detalle de presupuestos con montos aprobados, ejecutados y disponibles.",
+    "relatedApiId": "api-017",
+    "curlExample": "curl -X POST https://stage-cai-conecta.segurosbolivar.com/procurementprocesofinanciero/v1/consultarPresupuesto -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"centroCosto\": \"CC-TEC-001\", \"anio\": 2025, \"estado\": \"APROBADO\"}'"
   }
 ]

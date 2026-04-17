@@ -62,7 +62,7 @@ declare const SwaggerUIBundle: any;
         display: inline-flex;
         align-items: center;
         gap: var(--sb-ui-spacing-sm, 8px);
-        color: var(--sb-ui-color-primary, #003b7a);
+        color: var(--sb-ui-color-primary, #007A3D);
         cursor: pointer;
         font-weight: 600;
         font-size: var(--sb-ui-font-size-sm, 0.875rem);
@@ -71,7 +71,7 @@ declare const SwaggerUIBundle: any;
       }
 
       .back-link:hover {
-        color: var(--sb-ui-color-primary-light, #1a5fa8);
+        color: var(--sb-ui-color-primary-light, #009648);
       }
 
       .api-title {

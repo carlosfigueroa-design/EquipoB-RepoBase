@@ -41,7 +41,7 @@ import { SidebarComponent } from './shared/components/sidebar.component';
     .app-content {
       flex: 1;
       padding: var(--sb-ui-spacing-lg, 24px);
-      background-color: var(--sb-ui-bg-primary, #f5f7fa);
+      background-color: var(--sb-ui-bg-primary, #f4faf6);
       overflow-y: auto;
     }
   `],

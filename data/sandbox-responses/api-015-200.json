@@ -1,0 +1,18 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-015"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "recepcionId": "REC-2025-001234",
+      "ordenCompraId": "OC-2025-005678",
+      "estado": "RECIBIDO_TOTAL",
+      "cantidadRecibida": 1,
+      "observaciones": "Servicio recibido a satisfacción",
+      "fechaRecepcion": "2025-04-17T15:00:00Z"
+    }
+  }
+}

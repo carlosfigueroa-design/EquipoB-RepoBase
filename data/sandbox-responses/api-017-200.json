@@ -1,0 +1,33 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-017"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "presupuestos": [
+        {
+          "presupuestoId": "PPTO-2025-003456",
+          "centroCosto": "CC-TEC-001",
+          "descripcion": "Presupuesto TI Q2 2025",
+          "montoAprobado": 25000000,
+          "montoEjecutado": 8500000,
+          "montoDisponible": 16500000,
+          "estado": "APROBADO"
+        },
+        {
+          "presupuestoId": "PPTO-2025-003457",
+          "centroCosto": "CC-TEC-001",
+          "descripcion": "Presupuesto Infraestructura Q2 2025",
+          "montoAprobado": 50000000,
+          "montoEjecutado": 22000000,
+          "montoDisponible": 28000000,
+          "estado": "APROBADO"
+        }
+      ],
+      "totalRegistros": 2
+    }
+  }
+}

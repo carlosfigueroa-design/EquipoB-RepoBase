@@ -1,0 +1,16 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-014-err"
+  },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "La respuesta al presupuesto no es válida",
+    "statusCode": 400,
+    "details": [
+      { "field": "presupuestoId", "message": "Presupuesto no encontrado" },
+      { "field": "respuesta", "message": "Debe ser APROBADO, RECHAZADO o DEVUELTO" }
+    ]
+  }
+}

@@ -17,7 +17,7 @@ import { ApiCatalogItem } from '../../core/models/api-catalog.model';
           <i class="fa fa-book"></i> Catálogo de APIs
         </h1>
         <p class="catalog-subtitle">
-          Explora las APIs disponibles del ecosistema de Seguros Bolívar
+          Explora las APIs disponibles del ecosistema Vínculo Bolívar
         </p>
       </header>
 
@@ -88,7 +88,7 @@ import { ApiCatalogItem } from '../../core/models/api-catalog.model';
     .catalog-title {
       font-family: var(--sb-ui-font-family, 'Segoe UI', sans-serif);
       font-size: var(--sb-ui-font-size-xxl, 2rem);
-      color: var(--sb-ui-color-primary, #003b7a);
+      color: var(--sb-ui-color-primary, #007A3D);
       margin: 0 0 var(--sb-ui-spacing-sm, 8px) 0;
     }
 
@@ -144,18 +144,24 @@ import { ApiCatalogItem } from '../../core/models/api-catalog.model';
       display: flex;
       flex-direction: column;
       gap: var(--sb-ui-spacing-md, 16px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .catalog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 122, 61, 0.12);
     }
 
     .card-icon {
       width: 48px;
       height: 48px;
       border-radius: var(--sb-ui-border-radius, 8px);
-      background-color: var(--sb-ui-bg-primary, #f5f7fa);
+      background-color: var(--sb-ui-bg-primary, #f4faf6);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: var(--sb-ui-font-size-xl, 1.5rem);
-      color: var(--sb-ui-color-primary, #003b7a);
+      color: var(--sb-ui-color-primary, #007A3D);
     }
 
     .card-body {

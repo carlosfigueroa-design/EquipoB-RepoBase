@@ -20,7 +20,7 @@ interface ChatMessage {
     <div class="chat-container">
       <header class="chat-header">
         <h2><i class="fa fa-robot"></i> Asistente IA</h2>
-        <p>Pregúntame sobre las APIs de Seguros Bolívar</p>
+        <p>Pregúntame sobre las APIs de Vínculo Bolívar</p>
       </header>
 
       <div class="chat-messages" #messagesContainer>
@@ -120,33 +120,33 @@ interface ChatMessage {
     .chat-header p{margin:4px 0 0;color:var(--sb-ui-text-secondary,#6c757d);font-size:.875rem}
     .chat-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding:16px 0}
     .chat-welcome{text-align:center;padding:32px;color:var(--sb-ui-text-secondary,#6c757d)}
-    .welcome-icon{font-size:3rem;color:var(--sb-ui-color-primary,#003b7a);margin-bottom:16px}
+    .welcome-icon{font-size:3rem;color:var(--sb-ui-color-primary,#007A3D);margin-bottom:16px}
     .chat-welcome h3{margin:0 0 8px;color:var(--sb-ui-text-primary,#1a1a2e)}
     .chat-welcome p{margin:0 0 16px}
     .suggestions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-    .suggestion-chip{padding:8px 16px;border:1px solid var(--sb-ui-color-primary,#003b7a);border-radius:20px;background:transparent;color:var(--sb-ui-color-primary,#003b7a);cursor:pointer;font-size:.875rem;transition:all .2s}
-    .suggestion-chip:hover{background:var(--sb-ui-color-primary,#003b7a);color:#fff}
+    .suggestion-chip{padding:8px 16px;border:1px solid var(--sb-ui-color-primary,#007A3D);border-radius:20px;background:transparent;color:var(--sb-ui-color-primary,#007A3D);cursor:pointer;font-size:.875rem;transition:all .2s}
+    .suggestion-chip:hover{background:var(--sb-ui-color-primary,#007A3D);color:#fff}
     .message{display:flex;gap:8px;max-width:85%}
     .message--user{align-self:flex-end;flex-direction:row-reverse}
     .message--assistant{align-self:flex-start}
     .message-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.875rem}
-    .message--user .message-avatar{background:var(--sb-ui-color-primary,#003b7a);color:#fff}
-    .message--assistant .message-avatar{background:var(--sb-ui-bg-primary,#f5f7fa);color:var(--sb-ui-color-primary,#003b7a);border:1px solid var(--sb-ui-border-color,#dee2e6)}
+    .message--user .message-avatar{background:var(--sb-ui-color-primary,#007A3D);color:#fff}
+    .message--assistant .message-avatar{background:var(--sb-ui-bg-primary,#f4faf6);color:var(--sb-ui-color-primary,#007A3D);border:1px solid var(--sb-ui-border-color,#dee2e6)}
     .message-bubble{border-radius:8px;padding:8px 16px;line-height:1.5}
-    .message--user .message-bubble{background:var(--sb-ui-color-primary,#003b7a);color:#fff}
-    .message--assistant .message-bubble{background:var(--sb-ui-bg-primary,#f5f7fa);color:var(--sb-ui-text-primary,#1a1a2e);border:1px solid var(--sb-ui-border-color,#dee2e6)}
+    .message--user .message-bubble{background:var(--sb-ui-color-primary,#007A3D);color:#fff}
+    .message--assistant .message-bubble{background:var(--sb-ui-bg-primary,#f4faf6);color:var(--sb-ui-text-primary,#1a1a2e);border:1px solid var(--sb-ui-border-color,#dee2e6)}
     .message-content{white-space:pre-wrap;word-break:break-word}
-    .cursor{animation:blink .7s step-end infinite;font-weight:700;color:var(--sb-ui-color-primary,#003b7a)}
+    .cursor{animation:blink .7s step-end infinite;font-weight:700;color:var(--sb-ui-color-primary,#007A3D)}
     @keyframes blink{50%{opacity:0}}
     .message-extras{margin-top:8px;border-top:1px solid var(--sb-ui-border-color,#dee2e6);padding-top:8px}
-    .api-link{display:inline-flex;align-items:center;gap:4px;color:var(--sb-ui-color-primary,#003b7a);font-weight:600;font-size:.875rem;cursor:pointer;text-decoration:none}
-    .api-link:hover{color:var(--sb-ui-color-primary-light,#1a5fa8);text-decoration:underline}
+    .api-link{display:inline-flex;align-items:center;gap:4px;color:var(--sb-ui-color-primary,#007A3D);font-weight:600;font-size:.875rem;cursor:pointer;text-decoration:none}
+    .api-link:hover{color:var(--sb-ui-color-primary-light,#009648);text-decoration:underline}
     .curl-block{margin-top:8px;border-radius:4px;overflow:hidden;border:1px solid var(--sb-ui-border-color,#dee2e6)}
     .curl-header{display:flex;justify-content:space-between;align-items:center;padding:4px 8px;background:var(--sb-ui-bg-dark,#1a1a2e);color:#fff;font-size:.75rem;font-weight:600}
     .copy-btn{background:transparent;border:none;color:#fff;cursor:pointer;font-size:.75rem;display:flex;align-items:center;gap:4px;padding:2px 6px;border-radius:4px}
     .copy-btn:hover{background:rgba(255,255,255,.15)}
     .curl-block pre{margin:0;padding:8px;background:var(--sb-ui-bg-dark,#1a1a2e);overflow-x:auto}
-    .curl-block code{color:var(--sb-ui-color-secondary,#00a651);font-size:.75rem;font-family:'Courier New',monospace;white-space:pre-wrap;word-break:break-all}
+    .curl-block code{color:var(--sb-ui-color-secondary,#F5A800);font-size:.75rem;font-family:'Courier New',monospace;white-space:pre-wrap;word-break:break-all}
     .typing-indicator{display:flex;gap:4px;padding:4px 0}
     .typing-indicator span{width:8px;height:8px;border-radius:50%;background:var(--sb-ui-text-muted,#adb5bd);animation:bounce 1.4s infinite ease-in-out both}
     .typing-indicator span:nth-child(1){animation-delay:-.32s}

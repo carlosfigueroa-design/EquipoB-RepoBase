@@ -36,6 +36,7 @@ import { AuthService } from '../../core/services/auth.service';
             </a>
           </li>
           <li *ngIf="isAdmin">
+            <div class="nav-separator"></div>
             <a routerLink="/admin" routerLinkActive="active" class="nav-link">
               <i class="fa-solid fa-cog"></i>
               <span>Administración</span>
@@ -43,15 +44,22 @@ import { AuthService } from '../../core/services/auth.service';
           </li>
         </ng-container>
       </ul>
+
+      <div class="sidebar-footer">
+        <span class="sidebar-version">Vínculo Bolívar v1.0</span>
+      </div>
     </nav>
   `,
   styles: [`
     .app-sidebar {
-      width: 220px;
+      width: 230px;
       min-height: 100%;
-      background-color: var(--sb-ui-bg-sidebar, #002a5c);
+      background: linear-gradient(180deg, var(--sb-ui-bg-sidebar, #005a2b) 0%, #004420 100%);
       padding: var(--sb-ui-spacing-md, 16px) 0;
       flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .sidebar-nav {
@@ -60,36 +68,58 @@ import { AuthService } from '../../core/services/auth.service';
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: var(--sb-ui-spacing-xs, 4px);
+      gap: 2px;
     }
 
     .nav-link {
       display: flex;
       align-items: center;
-      gap: var(--sb-ui-spacing-sm, 8px);
-      padding: var(--sb-ui-spacing-sm, 8px) var(--sb-ui-spacing-lg, 24px);
-      color: rgba(255, 255, 255, 0.75);
+      gap: 10px;
+      padding: 12px var(--sb-ui-spacing-lg, 24px);
+      color: rgba(255, 255, 255, 0.7);
       text-decoration: none;
       font-size: var(--sb-ui-font-size-sm, 0.875rem);
       font-weight: 500;
-      transition: background-color 0.2s, color 0.2s;
+      transition: all 0.2s ease;
       border-left: 3px solid transparent;
+      position: relative;
     }
 
     .nav-link:hover {
       background-color: rgba(255, 255, 255, 0.08);
-      color: var(--sb-ui-text-light, #ffffff);
+      color: var(--sb-ui-text-light, #FFFFFF);
       text-decoration: none;
     }
 
     .nav-link.active {
       background-color: rgba(255, 255, 255, 0.12);
-      color: var(--sb-ui-text-light, #ffffff);
-      border-left-color: var(--sb-ui-color-secondary, #00a651);
+      color: var(--sb-ui-text-light, #FFFFFF);
+      border-left-color: var(--sb-ui-color-secondary, #F5A800);
       font-weight: 600;
     }
 
-    .nav-link i { width: 20px; text-align: center; }
+    .nav-link i {
+      width: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .nav-separator {
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.1);
+      margin: 8px var(--sb-ui-spacing-lg, 24px);
+    }
+
+    .sidebar-footer {
+      padding: 12px var(--sb-ui-spacing-lg, 24px);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sidebar-version {
+      font-size: 0.7rem;
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.3px;
+    }
   `],
 })
 export class SidebarComponent {

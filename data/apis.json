@@ -228,5 +228,166 @@
     "specFile": "",
     "createdAt": "2024-06-01T10:00:00Z",
     "updatedAt": "2024-06-25T14:00:00Z"
+  },
+  {
+    "id": "api-011",
+    "name": "CAI - Anular Recepción (Coupa)",
+    "category": "CAI - Procurement",
+    "description": "API del módulo CAI para anular recepciones de compras registradas en Coupa. Permite reversar recepciones erróneas o duplicadas, actualizando el estado en el sistema de procurement y notificando al proveedor correspondiente.",
+    "descriptionSummary": "Anulación de recepciones de compras en Coupa",
+    "useCases": [
+      "Anular recepción registrada por error",
+      "Reversar recepción duplicada",
+      "Actualizar estado de recepción en Coupa"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-rotate-left",
+    "contactTeam": {
+      "teamName": "Equipo CAI Procurement",
+      "email": "cai-procurement@segurosbolivar.com",
+      "area": "Compras y Abastecimiento"
+    },
+    "specFile": "cai-procurement.json",
+    "createdAt": "2025-01-10T09:00:00Z",
+    "updatedAt": "2025-04-01T11:00:00Z"
+  },
+  {
+    "id": "api-012",
+    "name": "CAI - Órdenes de Compra (Coupa)",
+    "category": "CAI - Procurement",
+    "description": "API del módulo CAI para gestionar órdenes de compra en Coupa. Permite crear, consultar y sincronizar órdenes de compra entre el sistema interno de Seguros Bolívar y la plataforma Coupa, incluyendo líneas de detalle, aprobaciones y estados.",
+    "descriptionSummary": "Gestión de órdenes de compra en Coupa",
+    "useCases": [
+      "Crear orden de compra en Coupa",
+      "Sincronizar órdenes entre sistemas",
+      "Consultar estado de órdenes de compra"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-cart-shopping",
+    "contactTeam": {
+      "teamName": "Equipo CAI Procurement",
+      "email": "cai-procurement@segurosbolivar.com",
+      "area": "Compras y Abastecimiento"
+    },
+    "specFile": "cai-procurement.json",
+    "createdAt": "2025-01-10T09:00:00Z",
+    "updatedAt": "2025-04-01T11:00:00Z"
+  },
+  {
+    "id": "api-013",
+    "name": "CAI - Respuesta Orden de Compra",
+    "category": "CAI - Procurement",
+    "description": "API del módulo CAI para registrar la respuesta del proveedor a una orden de compra. Permite confirmar, rechazar o solicitar modificaciones a órdenes de compra emitidas, actualizando el flujo de procurement en CONECTA.",
+    "descriptionSummary": "Respuesta de proveedores a órdenes de compra vía CONECTA",
+    "useCases": [
+      "Confirmar aceptación de orden de compra",
+      "Rechazar orden de compra con motivo",
+      "Solicitar modificación de condiciones"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-reply",
+    "contactTeam": {
+      "teamName": "Equipo CAI Procurement",
+      "email": "cai-procurement@segurosbolivar.com",
+      "area": "Compras y Abastecimiento"
+    },
+    "specFile": "cai-procurement.json",
+    "createdAt": "2025-02-01T10:00:00Z",
+    "updatedAt": "2025-04-05T14:00:00Z"
+  },
+  {
+    "id": "api-014",
+    "name": "CAI - Respuesta Presupuesto",
+    "category": "CAI - Financiero",
+    "description": "API del módulo CAI para registrar la respuesta a solicitudes de presupuesto. Permite aprobar, rechazar o devolver solicitudes de presupuesto del proceso financiero, integrando con el módulo de procurement financiero de CONECTA en el ambiente stage.",
+    "descriptionSummary": "Respuesta a solicitudes de presupuesto en proceso financiero",
+    "useCases": [
+      "Aprobar solicitud de presupuesto",
+      "Rechazar presupuesto con observaciones",
+      "Devolver presupuesto para corrección"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-file-invoice-dollar",
+    "contactTeam": {
+      "teamName": "Equipo CAI Financiero",
+      "email": "cai-financiero@segurosbolivar.com",
+      "area": "Finanzas Corporativas"
+    },
+    "specFile": "cai-procurement.json",
+    "createdAt": "2025-02-15T08:00:00Z",
+    "updatedAt": "2025-04-10T09:30:00Z"
+  },
+  {
+    "id": "api-015",
+    "name": "CAI - Respuesta Recepciones",
+    "category": "CAI - Procurement",
+    "description": "API del módulo CAI para registrar la respuesta a recepciones de bienes y servicios. Permite confirmar la recepción total o parcial, reportar novedades y actualizar el estado de entrega en el proceso de compra vía CONECTA.",
+    "descriptionSummary": "Respuesta a recepciones de bienes y servicios vía CONECTA",
+    "useCases": [
+      "Confirmar recepción total de bienes",
+      "Reportar recepción parcial con novedades",
+      "Registrar novedad en entrega de servicios"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-truck-ramp-box",
+    "contactTeam": {
+      "teamName": "Equipo CAI Procurement",
+      "email": "cai-procurement@segurosbolivar.com",
+      "area": "Compras y Abastecimiento"
+    },
+    "specFile": "cai-procurement.json",
+    "createdAt": "2025-02-01T10:00:00Z",
+    "updatedAt": "2025-04-05T14:00:00Z"
+  },
+  {
+    "id": "api-016",
+    "name": "CAI - Servicio Orden de Compra",
+    "category": "CAI - Procurement",
+    "description": "API del módulo CAI para la gestión del servicio de órdenes de compra en el ambiente stage de CONECTA. Permite crear, actualizar y consultar órdenes de compra de servicios, gestionando el ciclo completo desde la solicitud hasta la facturación.",
+    "descriptionSummary": "Gestión de órdenes de compra de servicios en CONECTA stage",
+    "useCases": [
+      "Crear orden de compra de servicios",
+      "Actualizar estado de orden de servicio",
+      "Consultar órdenes de servicio activas"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-handshake",
+    "contactTeam": {
+      "teamName": "Equipo CAI Procurement",
+      "email": "cai-procurement@segurosbolivar.com",
+      "area": "Compras y Abastecimiento"
+    },
+    "specFile": "cai-procurement.json",
+    "createdAt": "2025-03-01T09:00:00Z",
+    "updatedAt": "2025-04-12T10:00:00Z"
+  },
+  {
+    "id": "api-017",
+    "name": "CAI - Consultar Presupuesto",
+    "category": "CAI - Financiero",
+    "description": "API del módulo CAI para consultar el estado y detalle de presupuestos en el proceso financiero. Permite obtener información de presupuestos aprobados, pendientes y rechazados, incluyendo montos, centros de costo y partidas presupuestales.",
+    "descriptionSummary": "Consulta de presupuestos en el proceso financiero",
+    "useCases": [
+      "Consultar presupuesto por centro de costo",
+      "Verificar disponibilidad presupuestal",
+      "Obtener detalle de partidas presupuestales"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-magnifying-glass-dollar",
+    "contactTeam": {
+      "teamName": "Equipo CAI Financiero",
+      "email": "cai-financiero@segurosbolivar.com",
+      "area": "Finanzas Corporativas"
+    },
+    "specFile": "cai-procurement.json",
+    "createdAt": "2025-03-10T11:00:00Z",
+    "updatedAt": "2025-04-15T15:00:00Z"
   }
 ]

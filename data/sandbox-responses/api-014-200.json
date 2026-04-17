@@ -1,0 +1,18 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-014"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "presupuestoId": "PPTO-2025-003456",
+      "estado": "APROBADO",
+      "montoAprobado": 25000000,
+      "centroCosto": "CC-TEC-001",
+      "observaciones": "Presupuesto aprobado para Q2 2025",
+      "fechaAprobacion": "2025-04-17T14:00:00Z"
+    }
+  }
+}

@@ -1,7 +1,19 @@
-/* Global styles — Portal de APIs SIOP */
+/* Global styles — Vínculo Bolívar */
 
 :root {
-  font-family: var(--sb-ui-font-family, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+  /* ── Colores corporativos Seguros Bolívar ── */
+  --sb-ui-color-primary: #007A3D;
+  --sb-ui-color-primary-light: #009648;
+  --sb-ui-color-secondary: #F5A800;
+  --sb-ui-color-secondary-light: #FFC233;
+  --sb-ui-text-light: #FFFFFF;
+  --sb-ui-bg-primary: #f4faf6;
+
+  /* ── Sidebar derivado del verde primario ── */
+  --sb-ui-bg-sidebar: #005a2b;
+
+  /* ── Tipografía ── */
+  font-family: var(--sb-ui-typography-fontFamily, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
 }
 
 * {
@@ -11,17 +23,51 @@
 }
 
 body {
-  background-color: var(--sb-ui-bg-primary, #f5f7fa);
-  color: var(--sb-ui-text-primary, #1a1a2e);
+  background-color: var(--sb-ui-bg-primary, #f4faf6);
+  color: var(--sb-ui-color-grayscale-D400, #282828);
   font-size: 14px;
   line-height: 1.5;
 }
 
 a {
-  color: var(--sb-ui-color-primary, #003b7a);
+  color: var(--sb-ui-color-primary, #007A3D);
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+/* ── Smooth scrolling & selection ── */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--sb-ui-color-primary, #007A3D);
+  color: var(--sb-ui-text-light, #FFFFFF);
+}
+
+/* ── Focus visible for accessibility ── */
+:focus-visible {
+  outline: 2px solid var(--sb-ui-color-secondary, #F5A800);
+  outline-offset: 2px;
+}
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--sb-ui-color-grayscale-L200, #E1E1E1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--sb-ui-color-grayscale-D200, #5B5B5B);
 }

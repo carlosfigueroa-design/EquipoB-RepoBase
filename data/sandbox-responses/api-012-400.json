@@ -1,0 +1,16 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-012-err"
+  },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "Los datos de la orden de compra no son válidos",
+    "statusCode": 400,
+    "details": [
+      { "field": "proveedor.nit", "message": "NIT del proveedor es obligatorio" },
+      { "field": "lineas", "message": "Debe incluir al menos una línea de detalle" }
+    ]
+  }
+}

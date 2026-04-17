@@ -1,0 +1,16 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-013-err"
+  },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "La respuesta a la orden de compra no es válida",
+    "statusCode": 400,
+    "details": [
+      { "field": "ordenCompraId", "message": "Orden de compra no encontrada o ya respondida" },
+      { "field": "respuesta", "message": "Debe ser ACEPTADA, RECHAZADA o MODIFICACION" }
+    ]
+  }
+}

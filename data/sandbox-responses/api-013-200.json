@@ -1,0 +1,17 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-013"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "ordenCompraId": "OC-2025-005678",
+      "estadoRespuesta": "ACEPTADA",
+      "observaciones": "Orden aceptada. Entrega programada para el 15 de mayo.",
+      "fechaCompromisoEntrega": "2025-05-15",
+      "fechaRegistro": "2025-04-17T11:00:00Z"
+    }
+  }
+}

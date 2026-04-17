@@ -1,0 +1,16 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-017-err"
+  },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "Los parámetros de consulta no son válidos",
+    "statusCode": 400,
+    "details": [
+      { "field": "centroCosto", "message": "Centro de costo no encontrado" },
+      { "field": "anio", "message": "El año debe ser un valor válido" }
+    ]
+  }
+}

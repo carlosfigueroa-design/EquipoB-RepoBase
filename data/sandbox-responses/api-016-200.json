@@ -1,0 +1,24 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-cai-016"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "ordenServicioId": "OS-2025-007890",
+      "estado": "Creada",
+      "tipoServicio": "CONSULTORIA",
+      "proveedor": {
+        "nit": "900123456-1",
+        "razonSocial": "Proveedor ABC S.A.S"
+      },
+      "valorTotal": 45000000,
+      "centroCosto": "CC-TEC-001",
+      "fechaInicio": "2025-05-01",
+      "fechaFin": "2025-08-31",
+      "fechaCreacion": "2025-04-17T16:00:00Z"
+    }
+  }
+}
