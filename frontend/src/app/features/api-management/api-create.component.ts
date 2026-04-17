@@ -117,22 +117,22 @@ import { ApiCatalogItem } from '../../core/models/api-catalog.model';
                   <span class="analysis-label">Endpoints</span>
                 </div>
                 <div class="analysis-item">
-                  <span class="analysis-number">{{ (aiAnalysis['methodsDetected'] as string[])?.length || 0 }}</span>
+                  <span class="analysis-number">{{ getAnalysisArrayLength('methodsDetected') }}</span>
                   <span class="analysis-label">Métodos HTTP</span>
                 </div>
                 <div class="analysis-item">
-                  <span class="analysis-number">{{ (aiAnalysis['tagsDetected'] as string[])?.length || 0 }}</span>
+                  <span class="analysis-number">{{ getAnalysisArrayLength('tagsDetected') }}</span>
                   <span class="analysis-label">Tags</span>
                 </div>
                 <div class="analysis-item">
-                  <span class="analysis-number">{{ (aiAnalysis['serversDetected'] as string[])?.length || 0 }}</span>
+                  <span class="analysis-number">{{ getAnalysisArrayLength('serversDetected') }}</span>
                   <span class="analysis-label">Servidores</span>
                 </div>
               </div>
               <div class="analysis-details">
                 <span class="analysis-tag">Categoría: {{ aiAnalysis['categoryInferred'] }}</span>
                 <span class="analysis-tag">Área: {{ aiAnalysis['areaInferred'] }}</span>
-                @for (method of (aiAnalysis['methodsDetected'] as string[]) || []; track method) {
+                @for (method of getAnalysisArray('methodsDetected'); track method) {
                   <span class="analysis-tag method">{{ method }}</span>
                 }
               </div>
@@ -293,6 +293,16 @@ export class ApiCreateComponent {
     this.createdApi = null;
     this.aiAnalysis = null;
     this.parseError = '';
+  }
+
+  getAnalysisArray(key: string): string[] {
+    if (!this.aiAnalysis) return [];
+    const val = this.aiAnalysis[key];
+    return Array.isArray(val) ? val : [];
+  }
+
+  getAnalysisArrayLength(key: string): number {
+    return this.getAnalysisArray(key).length;
   }
 
   goToAdmin(): void {
