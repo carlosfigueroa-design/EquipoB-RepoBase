@@ -1,0 +1,16 @@
+{
+  "statusCode": 200,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-025" },
+  "body": {
+    "success": true,
+    "data": {
+      "asistenciaId": "AST-2025-007890",
+      "tipo": "Asistencia Médica",
+      "estado": "En Camino",
+      "proveedor": { "nombre": "Red Médica Bolívar", "telefono": "018000123456" },
+      "ubicacion": { "lat": 4.6097, "lng": -74.0817, "direccion": "Cra 7 #72-13, Bogotá" },
+      "tiempoEstimado": "15 minutos",
+      "fechaSolicitud": "2025-04-17T18:30:00Z"
+    }
+  }
+}

@@ -187,6 +187,49 @@ export class RequestBuilderComponent implements OnInit {
       anio: 2025,
       estado: 'APROBADO'
     }, null, 2),
+    'api-018': JSON.stringify({
+      polizaId: 'POL-2024-001234',
+      beneficiarios: [
+        { nombre: 'María López', documento: '52345678', parentesco: 'Cónyuge', porcentaje: 60 },
+        { nombre: 'Carlos Pérez', documento: '1098765432', parentesco: 'Hijo', porcentaje: 40 }
+      ]
+    }, null, 2),
+    'api-019': JSON.stringify({
+      vehiculo: { placa: 'ABC123', marca: 'Mazda', modelo: 'CX-5', anio: 2023 },
+      tipoInspeccion: 'PRESENCIAL',
+      ciudad: 'Bogotá'
+    }, null, 2),
+    'api-022': JSON.stringify({
+      polizaId: 'POL-2025-009876',
+      participaciones: [
+        { compania: 'Seguros Bolívar', porcentaje: 60 },
+        { compania: 'Seguros Alfa', porcentaje: 25 },
+        { compania: 'Seguros Beta', porcentaje: 15 }
+      ],
+      primaTotal: 30000000
+    }, null, 2),
+    'api-023': JSON.stringify({
+      tipo: 'Proporcional',
+      reasegurador: 'Swiss Re',
+      porcentajeCesion: 40,
+      vigencia: { inicio: '2025-01-01', fin: '2025-12-31' }
+    }, null, 2),
+    'api-025': JSON.stringify({
+      tipo: 'MEDICA',
+      polizaId: 'POL-2024-001234',
+      ubicacion: { lat: 4.6097, lng: -74.0817, direccion: 'Cra 7 #72-13, Bogotá' },
+      descripcion: 'Dolor abdominal agudo'
+    }, null, 2),
+    'api-026': JSON.stringify({
+      polizaId: 'POL-2024-001234',
+      monto: 2450000,
+      canal: 'PSE',
+      bancoOrigen: 'Bancolombia'
+    }, null, 2),
+    'api-027': JSON.stringify({
+      polizaId: 'POL-2024-001234',
+      tipoDocumento: 'certificado'
+    }, null, 2),
   };
 
   private exampleEndpoints: Record<string, string> = {
@@ -205,6 +248,13 @@ export class RequestBuilderComponent implements OnInit {
     'api-015': '/procurementprocesocompra/v1/respuestaRecepciones',
     'api-016': '/procurementprocesocompra/v1/servicioOrdenCompra',
     'api-017': '/procurementprocesofinanciero/v1/consultarPresupuesto',
+    'api-018': '/v1/beneficiarios/gestionar',
+    'api-019': '/v1/inspecciones/vehicular',
+    'api-022': '/v1/coaseguro/registrar',
+    'api-023': '/v1/reaseguro/contratos',
+    'api-025': '/v1/asistencias/solicitar',
+    'api-026': '/v1/recaudo/registrar',
+    'api-027': '/v1/documentos/consultar',
   };
 
   ngOnInit(): void {

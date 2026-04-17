@@ -1,0 +1,15 @@
+{
+  "statusCode": 200,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-018" },
+  "body": {
+    "success": true,
+    "data": {
+      "beneficiarios": [
+        { "nombre": "María López Pérez", "documento": "52345678", "parentesco": "Cónyuge", "porcentaje": 60 },
+        { "nombre": "Carlos Pérez López", "documento": "1098765432", "parentesco": "Hijo", "porcentaje": 40 }
+      ],
+      "polizaId": "POL-2024-001234",
+      "totalBeneficiarios": 2
+    }
+  }
+}

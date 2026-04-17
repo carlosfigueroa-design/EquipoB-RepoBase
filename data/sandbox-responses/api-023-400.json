@@ -1,0 +1,12 @@
+{
+  "statusCode": 400,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-023-err" },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "Datos del contrato de reaseguro inválidos",
+    "statusCode": 400,
+    "details": [
+      { "field": "reasegurador", "message": "Reasegurador no registrado en el sistema" }
+    ]
+  }
+}

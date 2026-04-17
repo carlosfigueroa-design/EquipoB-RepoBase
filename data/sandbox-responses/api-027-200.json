@@ -1,0 +1,14 @@
+{
+  "statusCode": 200,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-027" },
+  "body": {
+    "success": true,
+    "data": {
+      "documentos": [
+        { "id": "DOC-001", "nombre": "Certificado_Poliza_POL-2024-001234.pdf", "tipo": "application/pdf", "tamano": "245KB", "fechaCarga": "2024-07-01T10:00:00Z" },
+        { "id": "DOC-002", "nombre": "Condiciones_Generales.pdf", "tipo": "application/pdf", "tamano": "1.2MB", "fechaCarga": "2024-07-01T10:00:00Z" }
+      ],
+      "totalDocumentos": 2
+    }
+  }
+}

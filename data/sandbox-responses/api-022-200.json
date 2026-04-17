@@ -1,0 +1,18 @@
+{
+  "statusCode": 200,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-022" },
+  "body": {
+    "success": true,
+    "data": {
+      "coaseguroId": "COA-2025-001234",
+      "polizaId": "POL-2025-009876",
+      "participaciones": [
+        { "compania": "Seguros Bolívar", "porcentaje": 60, "primaAsignada": 18000000 },
+        { "compania": "Seguros Alfa", "porcentaje": 25, "primaAsignada": 7500000 },
+        { "compania": "Seguros Beta", "porcentaje": 15, "primaAsignada": 4500000 }
+      ],
+      "primaTotal": 30000000,
+      "estado": "Activo"
+    }
+  }
+}

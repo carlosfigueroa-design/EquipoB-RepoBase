@@ -1,0 +1,12 @@
+{
+  "statusCode": 400,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-022-err" },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "Las participaciones de coaseguro no son válidas",
+    "statusCode": 400,
+    "details": [
+      { "field": "participaciones", "message": "Los porcentajes deben sumar 100%" }
+    ]
+  }
+}

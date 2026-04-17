@@ -1,0 +1,13 @@
+{
+  "statusCode": 400,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-025-err" },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "Datos de asistencia incompletos",
+    "statusCode": 400,
+    "details": [
+      { "field": "ubicacion", "message": "Debe proporcionar coordenadas o dirección" },
+      { "field": "tipo", "message": "Tipo de asistencia no válido" }
+    ]
+  }
+}

@@ -389,5 +389,258 @@
     "specFile": "cai-procurement.json",
     "createdAt": "2025-03-10T11:00:00Z",
     "updatedAt": "2025-04-15T15:00:00Z"
+  },
+  {
+    "id": "api-018",
+    "name": "API de Gestión de Beneficiarios",
+    "category": "Beneficiarios",
+    "description": "API para la gestión integral de beneficiarios de pólizas de seguros. Permite registrar, actualizar y consultar beneficiarios asociados a una póliza, incluyendo porcentajes de participación, datos de contacto y documentos de identidad.",
+    "descriptionSummary": "Gestión de beneficiarios asociados a pólizas",
+    "useCases": [
+      "Registrar beneficiarios de una póliza de vida",
+      "Actualizar datos de contacto de beneficiarios",
+      "Consultar beneficiarios por número de póliza"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-users",
+    "contactTeam": {
+      "teamName": "Equipo Core Seguros",
+      "email": "core-seguros@segurosbolivar.com",
+      "area": "Tecnología"
+    },
+    "specFile": "",
+    "createdAt": "2025-01-20T09:00:00Z",
+    "updatedAt": "2025-04-01T10:00:00Z"
+  },
+  {
+    "id": "api-019",
+    "name": "API de Inspección Vehicular",
+    "category": "Inspección",
+    "description": "API para gestionar el proceso de inspección vehicular previo a la emisión de pólizas de auto. Permite agendar inspecciones, registrar resultados fotográficos, validar estado del vehículo y generar el dictamen de inspección.",
+    "descriptionSummary": "Inspección vehicular para emisión de pólizas de auto",
+    "useCases": [
+      "Agendar inspección vehicular",
+      "Registrar fotos y estado del vehículo",
+      "Generar dictamen de inspección aprobado/rechazado"
+    ],
+    "status": "Publicada",
+    "version": "v2",
+    "icon": "fa-car",
+    "contactTeam": {
+      "teamName": "Equipo Autos Digital",
+      "email": "autos-digital@segurosbolivar.com",
+      "area": "Operaciones"
+    },
+    "specFile": "",
+    "createdAt": "2025-02-01T08:00:00Z",
+    "updatedAt": "2025-04-10T14:00:00Z"
+  },
+  {
+    "id": "api-020",
+    "name": "API de Firma Electrónica",
+    "category": "Firma Digital",
+    "description": "API para la firma electrónica de documentos de seguros. Permite generar solicitudes de firma, enviar documentos al firmante, validar firmas y obtener el documento firmado con certificado digital. Integración con proveedor de firma electrónica certificada.",
+    "descriptionSummary": "Firma electrónica de documentos de seguros",
+    "useCases": [
+      "Firmar póliza electrónicamente",
+      "Enviar documento para firma del asegurado",
+      "Validar firma electrónica de un documento"
+    ],
+    "status": "Borrador",
+    "version": "v1",
+    "icon": "fa-signature",
+    "contactTeam": {
+      "teamName": "Equipo Seguridad e Identidad",
+      "email": "seguridad@segurosbolivar.com",
+      "area": "Seguridad"
+    },
+    "specFile": "",
+    "createdAt": "2025-03-15T10:00:00Z",
+    "updatedAt": "2025-04-12T16:00:00Z"
+  },
+  {
+    "id": "api-021",
+    "name": "API de Geolocalización de Siniestros",
+    "category": "Siniestros",
+    "description": "API para registrar y consultar la geolocalización de siniestros reportados. Permite capturar coordenadas GPS del evento, generar mapas de calor de siniestralidad por zona y consultar siniestros cercanos a una ubicación.",
+    "descriptionSummary": "Geolocalización y mapeo de siniestros",
+    "useCases": [
+      "Registrar ubicación GPS de un siniestro",
+      "Consultar siniestros por zona geográfica",
+      "Generar mapa de calor de siniestralidad"
+    ],
+    "status": "Borrador",
+    "version": "v1",
+    "icon": "fa-map-location-dot",
+    "contactTeam": {
+      "teamName": "Equipo Siniestros Digital",
+      "email": "siniestros-digital@segurosbolivar.com",
+      "area": "Operaciones"
+    },
+    "specFile": "",
+    "createdAt": "2025-04-01T09:00:00Z",
+    "updatedAt": "2025-04-15T11:00:00Z"
+  },
+  {
+    "id": "api-022",
+    "name": "API de Coaseguro",
+    "category": "Coaseguro",
+    "description": "API para la gestión de operaciones de coaseguro entre compañías. Permite registrar participaciones, distribuir primas entre coaseguradores, consultar estados de cuenta y gestionar la liquidación de siniestros compartidos.",
+    "descriptionSummary": "Gestión de operaciones de coaseguro entre compañías",
+    "useCases": [
+      "Registrar participación de coaseguro",
+      "Distribuir prima entre coaseguradores",
+      "Liquidar siniestro compartido entre compañías"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-handshake",
+    "contactTeam": {
+      "teamName": "Equipo Reaseguro",
+      "email": "reaseguro@segurosbolivar.com",
+      "area": "Técnica"
+    },
+    "specFile": "",
+    "createdAt": "2025-01-10T10:00:00Z",
+    "updatedAt": "2025-03-20T15:00:00Z"
+  },
+  {
+    "id": "api-023",
+    "name": "API de Reaseguro",
+    "category": "Reaseguro",
+    "description": "API para la gestión de contratos y cesiones de reaseguro. Permite registrar contratos proporcionales y no proporcionales, calcular cesiones automáticas, consultar bordereaux y gestionar recuperos de reaseguro.",
+    "descriptionSummary": "Gestión de contratos y cesiones de reaseguro",
+    "useCases": [
+      "Registrar contrato de reaseguro proporcional",
+      "Calcular cesión automática de riesgo",
+      "Consultar bordereaux de reaseguro"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-shield-halved",
+    "contactTeam": {
+      "teamName": "Equipo Reaseguro",
+      "email": "reaseguro@segurosbolivar.com",
+      "area": "Técnica"
+    },
+    "specFile": "",
+    "createdAt": "2025-02-05T11:00:00Z",
+    "updatedAt": "2025-04-08T09:00:00Z"
+  },
+  {
+    "id": "api-024",
+    "name": "API de Scoring de Riesgo",
+    "category": "Suscripción",
+    "description": "API para el cálculo de scoring de riesgo en el proceso de suscripción. Evalúa el perfil del solicitante utilizando modelos actuariales, historial de siniestralidad, datos demográficos y variables de riesgo para generar un puntaje de aceptación.",
+    "descriptionSummary": "Scoring de riesgo para suscripción de seguros",
+    "useCases": [
+      "Calcular score de riesgo de un solicitante",
+      "Evaluar perfil de riesgo para auto",
+      "Obtener recomendación de aceptación/rechazo"
+    ],
+    "status": "Borrador",
+    "version": "v1",
+    "icon": "fa-chart-line",
+    "contactTeam": {
+      "teamName": "Equipo Actuarial",
+      "email": "actuarial@segurosbolivar.com",
+      "area": "Técnica"
+    },
+    "specFile": "",
+    "createdAt": "2025-03-20T14:00:00Z",
+    "updatedAt": "2025-04-16T10:00:00Z"
+  },
+  {
+    "id": "api-025",
+    "name": "API de Asistencia en Viaje",
+    "category": "Asistencias",
+    "description": "API para la gestión de servicios de asistencia en viaje. Permite solicitar asistencia médica, legal o vehicular, consultar proveedores de asistencia por ubicación, registrar eventos y hacer seguimiento en tiempo real del servicio.",
+    "descriptionSummary": "Gestión de asistencia en viaje (médica, legal, vehicular)",
+    "useCases": [
+      "Solicitar asistencia médica en viaje",
+      "Consultar proveedores de grúa cercanos",
+      "Hacer seguimiento en tiempo real de asistencia"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-plane-departure",
+    "contactTeam": {
+      "teamName": "Equipo Asistencias",
+      "email": "asistencias@segurosbolivar.com",
+      "area": "Operaciones"
+    },
+    "specFile": "",
+    "createdAt": "2025-01-25T08:00:00Z",
+    "updatedAt": "2025-04-05T12:00:00Z"
+  },
+  {
+    "id": "api-026",
+    "name": "API de Recaudo y Conciliación",
+    "category": "Pagos",
+    "description": "API para la gestión de recaudo de primas y conciliación bancaria. Permite registrar pagos recibidos por diferentes canales (PSE, tarjeta, débito automático), conciliar con extractos bancarios y generar reportes de cartera.",
+    "descriptionSummary": "Recaudo de primas y conciliación bancaria",
+    "useCases": [
+      "Registrar pago de prima por PSE",
+      "Conciliar pagos con extracto bancario",
+      "Generar reporte de cartera por vencer"
+    ],
+    "status": "Publicada",
+    "version": "v1",
+    "icon": "fa-money-bill-transfer",
+    "contactTeam": {
+      "teamName": "Equipo Financiero Digital",
+      "email": "financiero-digital@segurosbolivar.com",
+      "area": "Finanzas"
+    },
+    "specFile": "",
+    "createdAt": "2025-02-15T09:00:00Z",
+    "updatedAt": "2025-04-10T11:00:00Z"
+  },
+  {
+    "id": "api-027",
+    "name": "API de Documentos Digitales",
+    "category": "Documentos",
+    "description": "API para la gestión de documentos digitales del ecosistema asegurador. Permite cargar, almacenar, consultar y descargar documentos asociados a pólizas, siniestros y clientes. Soporta PDF, imágenes y documentos Office con versionamiento.",
+    "descriptionSummary": "Gestión de documentos digitales (pólizas, siniestros, clientes)",
+    "useCases": [
+      "Cargar documento soporte de siniestro",
+      "Descargar certificado de póliza en PDF",
+      "Consultar documentos asociados a un cliente"
+    ],
+    "status": "Deprecada",
+    "version": "v1",
+    "icon": "fa-file-pdf",
+    "contactTeam": {
+      "teamName": "Equipo Plataforma Digital",
+      "email": "plataforma@segurosbolivar.com",
+      "area": "Tecnología"
+    },
+    "specFile": "",
+    "createdAt": "2024-06-01T10:00:00Z",
+    "updatedAt": "2025-03-01T14:00:00Z"
+  },
+  {
+    "id": "api-028",
+    "name": "API de Telemedicina",
+    "category": "Salud",
+    "description": "API para la integración con servicios de telemedicina. Permite agendar consultas virtuales, conectar con médicos de la red, registrar diagnósticos y prescripciones, y gestionar el historial médico del asegurado.",
+    "descriptionSummary": "Integración con servicios de telemedicina",
+    "useCases": [
+      "Agendar consulta virtual con médico",
+      "Registrar diagnóstico y prescripción",
+      "Consultar historial médico del asegurado"
+    ],
+    "status": "Borrador",
+    "version": "v1",
+    "icon": "fa-stethoscope",
+    "contactTeam": {
+      "teamName": "Equipo Salud Digital",
+      "email": "salud-digital@segurosbolivar.com",
+      "area": "Salud"
+    },
+    "specFile": "",
+    "createdAt": "2025-04-10T08:00:00Z",
+    "updatedAt": "2025-04-16T17:00:00Z"
   }
 ]

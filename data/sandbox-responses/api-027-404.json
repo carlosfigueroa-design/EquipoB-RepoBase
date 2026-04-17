@@ -1,0 +1,9 @@
+{
+  "statusCode": 404,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-027-404" },
+  "body": {
+    "error": "NOT_FOUND",
+    "message": "No se encontraron documentos para la póliza indicada",
+    "statusCode": 404
+  }
+}

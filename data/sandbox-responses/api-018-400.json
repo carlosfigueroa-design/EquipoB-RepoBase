@@ -1,0 +1,12 @@
+{
+  "statusCode": 400,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-018-err" },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "La suma de porcentajes de beneficiarios debe ser 100%",
+    "statusCode": 400,
+    "details": [
+      { "field": "beneficiarios", "message": "Porcentajes suman 120%, deben sumar 100%" }
+    ]
+  }
+}

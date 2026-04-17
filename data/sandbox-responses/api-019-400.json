@@ -1,0 +1,13 @@
+{
+  "statusCode": 400,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-019-err" },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "Datos del vehículo incompletos",
+    "statusCode": 400,
+    "details": [
+      { "field": "vehiculo.placa", "message": "La placa es obligatoria" },
+      { "field": "vehiculo.anio", "message": "El año debe ser mayor a 2000" }
+    ]
+  }
+}

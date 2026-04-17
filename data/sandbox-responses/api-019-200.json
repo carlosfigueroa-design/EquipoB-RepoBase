@@ -1,0 +1,14 @@
+{
+  "statusCode": 200,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-019" },
+  "body": {
+    "success": true,
+    "data": {
+      "inspeccionId": "INS-2025-004567",
+      "estado": "Aprobada",
+      "vehiculo": { "placa": "ABC123", "marca": "Mazda", "modelo": "CX-5", "anio": 2023 },
+      "dictamen": "Vehículo en buen estado. Apto para aseguramiento.",
+      "fechaInspeccion": "2025-04-17T10:00:00Z"
+    }
+  }
+}

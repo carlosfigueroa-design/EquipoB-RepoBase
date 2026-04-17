@@ -2,7 +2,7 @@
   {
     "id": "user-001",
     "email": "admin@segurosbolivar.com",
-    "displayName": "Administrador SIOP",
+    "displayName": "Carlos Figueroa",
     "role": "Admin",
     "createdAt": "2024-01-01T00:00:00Z"
   },
@@ -12,5 +12,33 @@
     "displayName": "Usuario Demo",
     "role": "Externo",
     "createdAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "user-003",
+    "email": "cristian.carreno@segurosbolivar.com",
+    "displayName": "Cristian Carreño",
+    "role": "Admin",
+    "createdAt": "2025-01-15T08:00:00Z"
+  },
+  {
+    "id": "user-004",
+    "email": "desarrollador@segurosbolivar.com",
+    "displayName": "Dev Bolívar",
+    "role": "Externo",
+    "createdAt": "2025-02-01T10:00:00Z"
+  },
+  {
+    "id": "user-005",
+    "email": "qa@segurosbolivar.com",
+    "displayName": "QA Bolívar",
+    "role": "Externo",
+    "createdAt": "2025-02-10T09:00:00Z"
+  },
+  {
+    "id": "user-006",
+    "email": "arquitecto@segurosbolivar.com",
+    "displayName": "Arquitecto TI",
+    "role": "Admin",
+    "createdAt": "2025-03-01T11:00:00Z"
   }
 ]

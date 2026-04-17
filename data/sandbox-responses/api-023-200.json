@@ -1,0 +1,16 @@
+{
+  "statusCode": 200,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-023" },
+  "body": {
+    "success": true,
+    "data": {
+      "contratoId": "REA-2025-000456",
+      "tipo": "Proporcional - Cuota Parte",
+      "reasegurador": "Swiss Re",
+      "porcentajeCesion": 40,
+      "vigencia": { "inicio": "2025-01-01", "fin": "2025-12-31" },
+      "primasCedidas": 120000000,
+      "estado": "Vigente"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "statusCode": 200,
+  "headers": { "Content-Type": "application/json", "X-Request-Id": "mock-026" },
+  "body": {
+    "success": true,
+    "data": {
+      "recaudoId": "REC-2025-012345",
+      "polizaId": "POL-2024-001234",
+      "monto": 2450000,
+      "canal": "PSE",
+      "estado": "Confirmado",
+      "bancoOrigen": "Bancolombia",
+      "fechaPago": "2025-04-17T09:15:00Z",
+      "conciliado": true
+    }
+  }
+}
