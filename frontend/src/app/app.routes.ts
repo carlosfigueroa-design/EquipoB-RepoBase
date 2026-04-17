@@ -30,19 +30,16 @@ export const routes: Routes = [
   },
   {
     path: 'swagger/:id',
-    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/swagger-viewer/swagger-viewer.component').then((m) => m.SwaggerViewerComponent),
   },
   {
     path: 'sandbox',
-    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/sandbox/sandbox.component').then((m) => m.SandboxComponent),
   },
   {
     path: 'ai',
-    canActivate: [authGuard],
     loadComponent: () =>
       import('./features/ai-assistant/ai-chat.component').then((m) => m.AiChatComponent),
   },

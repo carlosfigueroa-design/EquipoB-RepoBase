@@ -357,18 +357,10 @@ export class CatalogDetailComponent implements OnInit {
   }
 
   viewDocumentation(): void {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/swagger', this.apiId]);
-    } else {
-      this.router.navigate(['/auth/login']);
-    }
+    this.router.navigate(['/swagger', this.apiId]);
   }
 
   trySandbox(): void {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/sandbox'], { state: { apiId: this.apiId } });
-    } else {
-      this.router.navigate(['/auth/login']);
-    }
+    this.router.navigate(['/sandbox'], { state: { apiId: this.apiId } });
   }
 }

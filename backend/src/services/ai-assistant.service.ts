@@ -57,6 +57,8 @@ export class AIAssistantService {
   private tokenize(message: string): string[] {
     return message
       .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
       .replace(/[.,;:!?¿¡"'()\[\]{}<>]/g, '')
       .split(/\s+/)
       .filter((t) => t.length > 0);
@@ -66,15 +68,19 @@ export class AIAssistantService {
   private countMatches(tokens: string[], keywords: string[]): number {
     let count = 0;
     for (const keyword of keywords) {
-      const kwLower = keyword.toLowerCase();
+      const kwLower = keyword
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
       // Support multi-word keywords (e.g. "crear póliza")
       if (kwLower.includes(' ')) {
         const kwParts = kwLower.split(/\s+/);
-        if (kwParts.every((part) => tokens.includes(part))) {
-          count++;
+        if (kwParts.every((part) => tokens.some((t) => t.includes(part) || part.includes(t)))) {
+          count += 2; // Boost multi-word matches
         }
       } else {
-        if (tokens.includes(kwLower)) {
+        // Partial match: token contains keyword or keyword contains token
+        if (tokens.some((t) => t.includes(kwLower) || kwLower.includes(t))) {
           count++;
         }
       }

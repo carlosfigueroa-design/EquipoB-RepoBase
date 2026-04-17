@@ -14,7 +14,7 @@ export async function executeSandbox(
 ): Promise<void> {
   try {
     const request = req.body as SandboxRequest;
-    const userId = req.user!.userId;
+    const userId = req.user?.userId ?? 'anonymous';
     const result = await sandboxService.execute(request, userId);
     res.status(200).json(result);
   } catch (err) {
@@ -27,7 +27,7 @@ export function getHistory(
   req: AuthenticatedRequest,
   res: Response
 ): void {
-  const userId = req.user!.userId;
+  const userId = req.user?.userId ?? 'anonymous';
   const history = sandboxService.getHistory(userId);
   res.status(200).json(history);
 }

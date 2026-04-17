@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   template: `
     <div class="login-wrapper">
       <div class="login-left">
@@ -68,6 +68,12 @@ import { AuthService } from '../../core/services/auth.service';
               }
             </button>
           </form>
+
+          <div class="login-back">
+            <a routerLink="/catalog" class="back-to-catalog">
+              <i class="fa fa-arrow-left"></i> Volver al catálogo público
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -218,6 +224,25 @@ import { AuthService } from '../../core/services/auth.service';
       align-items: center;
       justify-content: center;
       gap: 8px;
+    }
+
+    .login-back {
+      margin-top: var(--sb-ui-spacing-lg, 24px);
+      text-align: center;
+    }
+
+    .back-to-catalog {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--sb-ui-font-size-sm, 0.875rem);
+      color: var(--sb-ui-color-primary, #007A3D);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-to-catalog:hover {
+      text-decoration: underline;
     }
 
     @media (max-width: 900px) {

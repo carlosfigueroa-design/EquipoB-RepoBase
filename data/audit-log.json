@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "id": "15ed433a-e06a-46da-88e5-7201f7e7e27f",
+    "apiId": "api-001",
+    "userId": "user-003",
+    "action": "Cambio de estado: Publicada → Deprecada",
+    "previousStatus": "Publicada",
+    "newStatus": "Deprecada",
+    "timestamp": "2026-04-17T20:40:07.037Z"
+  },
+  {
+    "id": "99157494-607b-4253-80c3-77e41ddfd7e8",
+    "apiId": "api-002",
+    "userId": "user-003",
+    "action": "Cambio de estado: Publicada → Deprecada",
+    "previousStatus": "Publicada",
+    "newStatus": "Deprecada",
+    "timestamp": "2026-04-17T20:40:12.720Z"
+  },
+  {
+    "id": "8c1d3e97-aeae-44d1-a8f4-600bfe699722",
+    "apiId": "api-001",
+    "userId": "user-003",
+    "action": "Cambio de estado: Deprecada → Publicada",
+    "previousStatus": "Deprecada",
+    "newStatus": "Publicada",
+    "timestamp": "2026-04-17T20:40:18.914Z"
+  },
+  {
+    "id": "cd30b354-2ba5-4213-8ad9-94b2ea369e76",
+    "apiId": "api-002",
+    "userId": "user-003",
+    "action": "Cambio de estado: Deprecada → Publicada",
+    "previousStatus": "Deprecada",
+    "newStatus": "Publicada",
+    "timestamp": "2026-04-17T20:40:20.880Z"
+  },
+  {
+    "id": "bb4ec32e-e50c-42fd-a8b0-6f2260baea48",
+    "apiId": "c10d64f6-53ff-4d2a-b264-be0da466c6f6",
+    "userId": "user-003",
+    "action": "Cambio de estado: Borrador → Publicada",
+    "previousStatus": "Borrador",
+    "newStatus": "Publicada",
+    "timestamp": "2026-04-17T20:42:00.901Z"
+  }
+]

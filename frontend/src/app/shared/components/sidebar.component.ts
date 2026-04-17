@@ -16,27 +16,21 @@ import { AuthService } from '../../core/services/auth.service';
             <span>Catálogo</span>
           </a>
         </li>
-        <ng-container *ngIf="authService.isAuthenticated()">
+        <li>
+          <a routerLink="/sandbox" routerLinkActive="active" class="nav-link">
+            <i class="fa-solid fa-flask"></i>
+            <span>Sandbox</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/ai" routerLinkActive="active" class="nav-link">
+            <i class="fa-solid fa-robot"></i>
+            <span>Asistente IA</span>
+          </a>
+        </li>
+        <ng-container *ngIf="isAdmin">
+          <div class="nav-separator"></div>
           <li>
-            <a routerLink="/swagger" routerLinkActive="active" class="nav-link">
-              <i class="fa-solid fa-code"></i>
-              <span>Swagger</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/sandbox" routerLinkActive="active" class="nav-link">
-              <i class="fa-solid fa-flask"></i>
-              <span>Sandbox</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/ai" routerLinkActive="active" class="nav-link">
-              <i class="fa-solid fa-robot"></i>
-              <span>Asistente IA</span>
-            </a>
-          </li>
-          <li *ngIf="isAdmin">
-            <div class="nav-separator"></div>
             <a routerLink="/admin" routerLinkActive="active" class="nav-link">
               <i class="fa-solid fa-cog"></i>
               <span>Administración</span>

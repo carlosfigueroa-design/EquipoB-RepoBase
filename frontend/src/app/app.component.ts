@@ -18,7 +18,7 @@ import { SidebarComponent } from './shared/components/sidebar.component';
       <div class="app-shell">
         <app-header />
         <div class="app-body">
-          <app-sidebar *ngIf="authService.isAuthenticated()" />
+          <app-sidebar />
           <main class="app-content">
             <router-outlet />
           </main>
