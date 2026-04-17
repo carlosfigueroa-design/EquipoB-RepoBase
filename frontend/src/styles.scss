@@ -1,0 +1,27 @@
+/* Global styles — Portal de APIs SIOP */
+
+:root {
+  font-family: var(--sb-ui-font-family, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--sb-ui-bg-primary, #f5f7fa);
+  color: var(--sb-ui-text-primary, #1a1a2e);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--sb-ui-color-primary, #003b7a);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

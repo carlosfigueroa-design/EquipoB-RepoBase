@@ -1,0 +1,247 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API de Emisión de Pólizas",
+    "version": "1.0.0",
+    "description": "API para la emisión y generación de nuevas pólizas de seguros de Seguros Bolívar. Permite crear pólizas de vida, hogar, auto y salud.",
+    "contact": {
+      "name": "Equipo Core Seguros",
+      "email": "core-seguros@segurosbolivar.com"
+    }
+  },
+  "servers": [
+    { "url": "https://sandbox.segurosbolivar.com/v1", "description": "Sandbox" }
+  ],
+  "paths": {
+    "/polizas/emitir": {
+      "post": {
+        "summary": "Emitir nueva póliza",
+        "description": "Crea una nueva póliza de seguros con los datos del asegurado y plan seleccionado.",
+        "operationId": "emitirPoliza",
+        "tags": ["Emisión"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EmisionRequest" },
+              "example": {
+                "asegurado": {
+                  "nombre": "Juan Carlos Pérez López",
+                  "documento": "1234567890",
+                  "tipoDocumento": "CC",
+                  "fechaNacimiento": "1985-03-15",
+                  "email": "juan.perez@email.com",
+                  "telefono": "3001234567"
+                },
+                "plan": {
+                  "codigo": "vida-plus",
+                  "cobertura": "Muerte + Incapacidad"
+                },
+                "vigencia": {
+                  "inicio": "2024-07-01"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Póliza emitida exitosamente",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EmisionResponse" },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "polizaId": "POL-2024-001234",
+                    "estado": "Emitida",
+                    "asegurado": { "nombre": "Juan Carlos Pérez López", "documento": "1234567890" },
+                    "plan": { "nombre": "Vida Plus", "cobertura": "Muerte + Incapacidad", "primaAnual": 2450000 },
+                    "vigencia": { "inicio": "2024-07-01", "fin": "2025-07-01" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos inválidos en la solicitud",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "example": {
+                  "error": "VALIDATION_ERROR",
+                  "message": "El campo 'documento' es obligatorio",
+                  "statusCode": 400
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "example": {
+                  "error": "INTERNAL_ERROR",
+                  "message": "Error al procesar la emisión de póliza",
+                  "statusCode": 500
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/polizas/{polizaId}": {
+      "get": {
+        "summary": "Consultar póliza emitida",
+        "description": "Obtiene el detalle de una póliza emitida por su identificador.",
+        "operationId": "consultarPoliza",
+        "tags": ["Emisión"],
+        "parameters": [
+          {
+            "name": "polizaId",
+            "in": "path",
+            "required": true,
+            "description": "Identificador único de la póliza",
+            "schema": { "type": "string" },
+            "example": "POL-2024-001234"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalle de la póliza",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EmisionResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "Póliza no encontrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "example": { "error": "NOT_FOUND", "message": "Póliza no encontrada", "statusCode": 404 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/polizas/validar": {
+      "post": {
+        "summary": "Validar datos para emisión",
+        "description": "Valida los datos del asegurado y plan antes de emitir la póliza.",
+        "operationId": "validarEmision",
+        "tags": ["Emisión"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EmisionRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Datos válidos para emisión",
+            "content": {
+              "application/json": {
+                "example": { "valid": true, "message": "Datos válidos para emisión" }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos inválidos",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EmisionRequest": {
+        "type": "object",
+        "required": ["asegurado", "plan", "vigencia"],
+        "properties": {
+          "asegurado": {
+            "type": "object",
+            "required": ["nombre", "documento", "tipoDocumento"],
+            "properties": {
+              "nombre": { "type": "string", "description": "Nombre completo del asegurado", "example": "Juan Carlos Pérez López" },
+              "documento": { "type": "string", "description": "Número de documento de identidad", "example": "1234567890" },
+              "tipoDocumento": { "type": "string", "enum": ["CC", "CE", "NIT", "PP"], "description": "Tipo de documento", "example": "CC" },
+              "fechaNacimiento": { "type": "string", "format": "date", "example": "1985-03-15" },
+              "email": { "type": "string", "format": "email", "example": "juan.perez@email.com" },
+              "telefono": { "type": "string", "example": "3001234567" }
+            }
+          },
+          "plan": {
+            "type": "object",
+            "required": ["codigo"],
+            "properties": {
+              "codigo": { "type": "string", "description": "Código del plan de seguro", "example": "vida-plus" },
+              "cobertura": { "type": "string", "description": "Tipo de cobertura", "example": "Muerte + Incapacidad" }
+            }
+          },
+          "vigencia": {
+            "type": "object",
+            "required": ["inicio"],
+            "properties": {
+              "inicio": { "type": "string", "format": "date", "description": "Fecha de inicio de vigencia", "example": "2024-07-01" }
+            }
+          }
+        }
+      },
+      "EmisionResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "polizaId": { "type": "string", "example": "POL-2024-001234" },
+              "estado": { "type": "string", "example": "Emitida" },
+              "asegurado": {
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string" },
+                  "documento": { "type": "string" }
+                }
+              },
+              "plan": {
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string" },
+                  "cobertura": { "type": "string" },
+                  "primaAnual": { "type": "number" }
+                }
+              },
+              "vigencia": {
+                "type": "object",
+                "properties": {
+                  "inicio": { "type": "string", "format": "date" },
+                  "fin": { "type": "string", "format": "date" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string" },
+          "message": { "type": "string" },
+          "statusCode": { "type": "integer" }
+        }
+      }
+    }
+  }
+}

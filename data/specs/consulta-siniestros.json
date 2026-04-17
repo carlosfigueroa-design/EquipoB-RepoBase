@@ -1,0 +1,238 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API de Consulta de Siniestros",
+    "version": "1.0.0",
+    "description": "API para consultar el estado y detalle de siniestros reportados en Seguros Bolívar. Permite buscar por radicado, póliza o documento del asegurado.",
+    "contact": {
+      "name": "Equipo Siniestros Digital",
+      "email": "siniestros-digital@segurosbolivar.com"
+    }
+  },
+  "servers": [
+    { "url": "https://sandbox.segurosbolivar.com/v1", "description": "Sandbox" }
+  ],
+  "paths": {
+    "/siniestros/{radicado}": {
+      "get": {
+        "summary": "Consultar siniestro por radicado",
+        "description": "Obtiene el detalle completo de un siniestro por su número de radicado.",
+        "operationId": "consultarSiniestro",
+        "tags": ["Siniestros"],
+        "parameters": [
+          {
+            "name": "radicado",
+            "in": "path",
+            "required": true,
+            "description": "Número de radicado del siniestro",
+            "schema": { "type": "string" },
+            "example": "SIN-2024-005678"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalle del siniestro",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SiniestroResponse" },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "radicado": "SIN-2024-005678",
+                    "estado": "En Trámite",
+                    "polizaId": "POL-2024-001234",
+                    "asegurado": { "nombre": "María García Rodríguez", "documento": "9876543210" },
+                    "tipoSiniestro": "Accidente de Tránsito",
+                    "fechaEvento": "2024-06-15",
+                    "descripcion": "Colisión en intersección vial",
+                    "montoReclamado": 15000000,
+                    "seguimiento": [
+                      { "fecha": "2024-06-15", "estado": "Radicado", "detalle": "Siniestro radicado exitosamente" },
+                      { "fecha": "2024-06-16", "estado": "En Revisión", "detalle": "Documentos en revisión por ajustador" },
+                      { "fecha": "2024-06-18", "estado": "En Trámite", "detalle": "Peritaje programado" }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Siniestro no encontrado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "example": { "error": "NOT_FOUND", "message": "Siniestro no encontrado con radicado proporcionado", "statusCode": 404 }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "example": { "error": "INTERNAL_ERROR", "message": "Error al consultar siniestro", "statusCode": 500 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/siniestros": {
+      "get": {
+        "summary": "Buscar siniestros por póliza",
+        "description": "Lista los siniestros asociados a una póliza específica.",
+        "operationId": "buscarSiniestrosPorPoliza",
+        "tags": ["Siniestros"],
+        "parameters": [
+          {
+            "name": "polizaId",
+            "in": "query",
+            "required": true,
+            "description": "Número de póliza asociada",
+            "schema": { "type": "string" },
+            "example": "POL-2024-001234"
+          },
+          {
+            "name": "estado",
+            "in": "query",
+            "required": false,
+            "description": "Filtrar por estado del siniestro",
+            "schema": { "type": "string", "enum": ["Radicado", "En Revisión", "En Trámite", "Aprobado", "Rechazado", "Pagado"] }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de siniestros encontrados",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SiniestrosListResponse" },
+                "example": {
+                  "success": true,
+                  "data": [
+                    { "radicado": "SIN-2024-005678", "estado": "En Trámite", "tipoSiniestro": "Accidente de Tránsito", "fechaEvento": "2024-06-15", "montoReclamado": 15000000 },
+                    { "radicado": "SIN-2024-003210", "estado": "Pagado", "tipoSiniestro": "Robo de Vehículo", "fechaEvento": "2024-03-10", "montoReclamado": 45000000 }
+                  ],
+                  "total": 2
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Parámetros inválidos",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "example": { "error": "VALIDATION_ERROR", "message": "El parámetro 'polizaId' es obligatorio", "statusCode": 400 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/siniestros/{radicado}/seguimiento": {
+      "get": {
+        "summary": "Obtener seguimiento de siniestro",
+        "description": "Retorna el historial completo de seguimiento de un siniestro.",
+        "operationId": "seguimientoSiniestro",
+        "tags": ["Siniestros"],
+        "parameters": [
+          {
+            "name": "radicado",
+            "in": "path",
+            "required": true,
+            "description": "Número de radicado del siniestro",
+            "schema": { "type": "string" },
+            "example": "SIN-2024-005678"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Historial de seguimiento",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": {
+                    "radicado": "SIN-2024-005678",
+                    "seguimiento": [
+                      { "fecha": "2024-06-15", "estado": "Radicado", "detalle": "Siniestro radicado exitosamente" },
+                      { "fecha": "2024-06-16", "estado": "En Revisión", "detalle": "Documentos en revisión" },
+                      { "fecha": "2024-06-18", "estado": "En Trámite", "detalle": "Peritaje programado" }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Siniestro no encontrado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SiniestroResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "radicado": { "type": "string", "example": "SIN-2024-005678" },
+              "estado": { "type": "string", "enum": ["Radicado", "En Revisión", "En Trámite", "Aprobado", "Rechazado", "Pagado"] },
+              "polizaId": { "type": "string" },
+              "asegurado": {
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string" },
+                  "documento": { "type": "string" }
+                }
+              },
+              "tipoSiniestro": { "type": "string" },
+              "fechaEvento": { "type": "string", "format": "date" },
+              "descripcion": { "type": "string" },
+              "montoReclamado": { "type": "number" },
+              "seguimiento": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "fecha": { "type": "string", "format": "date" },
+                    "estado": { "type": "string" },
+                    "detalle": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "SiniestrosListResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SiniestroResponse" }
+          },
+          "total": { "type": "integer" }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string" },
+          "message": { "type": "string" },
+          "statusCode": { "type": "integer" }
+        }
+      }
+    }
+  }
+}

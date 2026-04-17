@@ -1,0 +1,42 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-005"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "cotizacionId": "COT-2024-007890",
+      "producto": "auto",
+      "solicitante": {
+        "nombre": "Carlos Andrés Martínez",
+        "documento": "1122334455"
+      },
+      "planes": [
+        {
+          "nombre": "Plan Básico",
+          "primaAnual": 3200000,
+          "primaMensual": 280000,
+          "coberturas": ["responsabilidad-civil", "asistencia-vial"],
+          "deducible": 2500000
+        },
+        {
+          "nombre": "Plan Plus",
+          "primaAnual": 4800000,
+          "primaMensual": 420000,
+          "coberturas": ["todo-riesgo", "responsabilidad-civil", "asistencia-vial"],
+          "deducible": 1500000
+        },
+        {
+          "nombre": "Plan Premium",
+          "primaAnual": 6500000,
+          "primaMensual": 565000,
+          "coberturas": ["todo-riesgo", "responsabilidad-civil", "asistencia-vial", "auto-sustituto"],
+          "deducible": 0
+        }
+      ],
+      "validezHasta": "2024-08-15"
+    }
+  }
+}

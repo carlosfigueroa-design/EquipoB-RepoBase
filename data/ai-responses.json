@@ -1,0 +1,130 @@
+[
+  {
+    "id": "ai-001",
+    "keywords": ["emitir", "póliza", "nueva", "emisión", "generar", "crear póliza"],
+    "question": "¿Cómo emitir una póliza?",
+    "answer": "Para emitir una nueva póliza, utiliza la **API de Emisión de Pólizas**. Esta API permite crear pólizas de seguros proporcionando los datos del asegurado, tipo de cobertura y plan seleccionado. Soporta productos de vida, hogar, auto y salud.",
+    "relatedApiId": "api-001",
+    "curlExample": "curl -X POST https://sandbox.segurosbolivar.com/v1/polizas/emitir -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"asegurado\": {\"nombre\": \"Juan Pérez\", \"documento\": \"1234567890\", \"tipoDocumento\": \"CC\"}, \"plan\": {\"codigo\": \"vida-plus\"}, \"vigencia\": {\"inicio\": \"2024-07-01\"}}'"
+  },
+  {
+    "id": "ai-002",
+    "keywords": ["renovar", "renovación", "vencer", "vencimiento", "extender"],
+    "question": "¿Cómo renovar una póliza?",
+    "answer": "Para renovar una póliza vigente, utiliza la **API de Renovación de Pólizas**. Esta API permite consultar pólizas próximas a vencer, calcular la nueva prima con ajustes y ejecutar la renovación manteniendo el historial del asegurado.",
+    "relatedApiId": "api-002",
+    "curlExample": "curl -X POST https://sandbox.segurosbolivar.com/v1/polizas/renovar -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"polizaId\": \"POL-2024-001234\", \"periodoRenovacion\": {\"inicio\": \"2025-07-01\", \"fin\": \"2026-07-01\"}}'"
+  },
+  {
+    "id": "ai-003",
+    "keywords": ["consultar", "siniestro", "estado", "radicado", "seguimiento", "buscar siniestro"],
+    "question": "¿Cómo consultar el estado de un siniestro?",
+    "answer": "Para consultar siniestros, utiliza la **API de Consulta de Siniestros**. Puedes buscar por número de radicado, póliza o documento del asegurado. La API retorna el estado actual, historial de seguimiento y documentos asociados.",
+    "relatedApiId": "api-003",
+    "curlExample": "curl -X GET https://sandbox.segurosbolivar.com/v1/siniestros/SIN-2024-005678 -H 'Authorization: Bearer {token}'"
+  },
+  {
+    "id": "ai-004",
+    "keywords": ["registrar", "reportar", "radicar", "nuevo siniestro", "accidente", "reclamación"],
+    "question": "¿Cómo registrar un siniestro?",
+    "answer": "Para registrar un nuevo siniestro, utiliza la **API de Registro de Siniestros**. Permite radicar siniestros de auto, hogar, vida y salud con la información del evento, documentos soporte y datos del beneficiario. Se genera un número de radicado único para seguimiento.",
+    "relatedApiId": "api-004",
+    "curlExample": "curl -X POST https://sandbox.segurosbolivar.com/v1/siniestros/registrar -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"polizaId\": \"POL-2024-001234\", \"tipoSiniestro\": \"Accidente de Tránsito\", \"fechaEvento\": \"2024-06-15\", \"descripcion\": \"Colisión en intersección vial\"}'"
+  },
+  {
+    "id": "ai-005",
+    "keywords": ["cotizar", "cotización", "precio", "prima", "cuánto cuesta", "calcular", "tarifa"],
+    "question": "¿Cómo cotizar un seguro?",
+    "answer": "Para cotizar un seguro, utiliza la **API de Cotización de Seguros**. Permite calcular primas en tiempo real para productos de auto, vida, hogar y salud según el perfil del solicitante y coberturas seleccionadas. Retorna múltiples planes con desglose de costos.",
+    "relatedApiId": "api-005",
+    "curlExample": "curl -X POST https://sandbox.segurosbolivar.com/v1/cotizaciones -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"producto\": \"auto\", \"solicitante\": {\"nombre\": \"Carlos Martínez\", \"documento\": \"1122334455\", \"tipoDocumento\": \"CC\"}, \"vehiculo\": {\"marca\": \"Mazda\", \"modelo\": \"CX-5\", \"anio\": 2023}}'"
+  },
+  {
+    "id": "ai-006",
+    "keywords": ["consultar póliza", "buscar póliza", "ver póliza", "detalle póliza", "información póliza", "mis pólizas"],
+    "question": "¿Cómo consultar una póliza?",
+    "answer": "Para consultar información de pólizas, utiliza la **API de Consulta de Pólizas**. Permite buscar por número de póliza, documento del asegurado o rango de fechas. Retorna datos de cobertura, beneficiarios, estado de pagos y vigencia.",
+    "relatedApiId": "api-006",
+    "curlExample": "curl -X GET https://sandbox.segurosbolivar.com/v1/polizas/POL-2024-001234 -H 'Authorization: Bearer {token}'"
+  },
+  {
+    "id": "ai-007",
+    "keywords": ["cancelar", "cancelación", "anular", "rescate", "devolución", "terminar póliza"],
+    "question": "¿Cómo cancelar una póliza?",
+    "answer": "Para cancelar una póliza, utiliza la **API de Cancelación de Pólizas**. Permite solicitar cancelación anticipada, calcular valores de rescate o devolución de prima no devengada, y ejecutar la cancelación con registro de motivo.",
+    "relatedApiId": "api-007",
+    "curlExample": "curl -X POST https://sandbox.segurosbolivar.com/v1/polizas/cancelar -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"polizaId\": \"POL-2024-001234\", \"motivo\": \"Solicitud del asegurado\", \"fechaCancelacion\": \"2024-08-01\"}'"
+  },
+  {
+    "id": "ai-008",
+    "keywords": ["pago", "pagos", "factura", "facturación", "cuenta", "cobro", "deuda", "pendiente"],
+    "question": "¿Cómo consultar pagos de una póliza?",
+    "answer": "Para consultar pagos, utiliza la **API de Consulta de Pagos**. Permite verificar pagos realizados, pendientes y vencidos, consultar historial de transacciones y obtener el estado de cuenta del asegurado.",
+    "relatedApiId": "api-008",
+    "curlExample": "curl -X GET https://sandbox.segurosbolivar.com/v1/pagos?polizaId=POL-2024-001234 -H 'Authorization: Bearer {token}'"
+  },
+  {
+    "id": "ai-009",
+    "keywords": ["autenticación", "login", "sesión", "token", "JWT", "OTP", "iniciar sesión", "acceso"],
+    "question": "¿Cómo funciona la autenticación?",
+    "answer": "La autenticación se gestiona con la **API de Autenticación de Clientes**. Soporta flujo de login con OTP por correo electrónico, generación de tokens JWT y validación de sesiones activas. El flujo es: 1) Solicitar OTP con email, 2) Verificar OTP, 3) Recibir token JWT para las demás APIs.",
+    "relatedApiId": "api-009",
+    "curlExample": "curl -X POST https://sandbox.segurosbolivar.com/v1/auth/otp/request -H 'Content-Type: application/json' -d '{\"email\": \"usuario@ejemplo.com\"}'"
+  },
+  {
+    "id": "ai-010",
+    "keywords": ["notificación", "notificaciones", "alerta", "aviso", "email", "SMS", "recordatorio"],
+    "question": "¿Cómo enviar notificaciones?",
+    "answer": "La **API de Notificaciones** permite enviar y gestionar notificaciones a clientes y usuarios internos. Soporta canales de email, SMS y push sobre eventos de pólizas, siniestros, pagos y vencimientos. Nota: esta API se encuentra actualmente en estado Borrador.",
+    "relatedApiId": "api-010",
+    "curlExample": "curl -X POST https://sandbox.segurosbolivar.com/v1/notificaciones/enviar -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"destinatario\": \"cliente@email.com\", \"canal\": \"email\", \"tipo\": \"vencimiento_poliza\", \"mensaje\": \"Su póliza vence en 30 días\"}'"
+  },
+  {
+    "id": "ai-011",
+    "keywords": ["sandbox", "probar", "prueba", "test", "simular", "ejecutar", "try"],
+    "question": "¿Cómo probar las APIs en el sandbox?",
+    "answer": "El **Sandbox Interactivo** te permite ejecutar llamadas de prueba simuladas contra las APIs. Selecciona una API del catálogo, configura el método HTTP, endpoint y body, y elige un escenario de respuesta (200, 400, 404, 500). Las respuestas son mock predefinidas con datos realistas del dominio asegurador.",
+    "relatedApiId": "",
+    "curlExample": ""
+  },
+  {
+    "id": "ai-012",
+    "keywords": ["swagger", "documentación", "OpenAPI", "spec", "especificación", "endpoints", "esquema"],
+    "question": "¿Dónde veo la documentación técnica de las APIs?",
+    "answer": "La documentación técnica de cada API está disponible en el **Visor Swagger** del portal. Navega al catálogo, selecciona una API y haz clic en 'Ver Documentación'. El visor muestra endpoints, métodos HTTP, parámetros, esquemas de request/response y códigos de respuesta en formato OpenAPI 3.0.",
+    "relatedApiId": "",
+    "curlExample": ""
+  },
+  {
+    "id": "ai-013",
+    "keywords": ["catálogo", "lista", "APIs disponibles", "qué APIs", "cuáles APIs", "explorar"],
+    "question": "¿Qué APIs están disponibles?",
+    "answer": "El portal cuenta con **10 APIs del dominio asegurador**: Emisión de Pólizas, Renovación de Pólizas, Consulta de Siniestros, Registro de Siniestros, Cotización de Seguros, Consulta de Pólizas, Cancelación de Pólizas, Consulta de Pagos, Autenticación de Clientes y Notificaciones. Puedes explorarlas en el catálogo público.",
+    "relatedApiId": "",
+    "curlExample": ""
+  },
+  {
+    "id": "ai-014",
+    "keywords": ["seguro auto", "vehículo", "carro", "automóvil", "SOAT", "todo riesgo"],
+    "question": "¿Qué APIs necesito para seguros de auto?",
+    "answer": "Para seguros de auto puedes usar: 1) **API de Cotización** para calcular primas según marca, modelo y año del vehículo. 2) **API de Emisión** para generar la póliza. 3) **API de Registro de Siniestros** para reportar accidentes. 4) **API de Consulta de Siniestros** para hacer seguimiento.",
+    "relatedApiId": "api-005",
+    "curlExample": "curl -X POST https://sandbox.segurosbolivar.com/v1/cotizaciones -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"producto\": \"auto\", \"solicitante\": {\"nombre\": \"Usuario\", \"documento\": \"1234567890\", \"tipoDocumento\": \"CC\"}, \"vehiculo\": {\"marca\": \"Mazda\", \"modelo\": \"CX-5\", \"anio\": 2023}}'"
+  },
+  {
+    "id": "ai-015",
+    "keywords": ["integración", "integrar", "conectar", "implementar", "cómo empezar", "primeros pasos", "guía"],
+    "question": "¿Cómo empiezo a integrar las APIs?",
+    "answer": "Para integrar las APIs de Seguros Bolívar sigue estos pasos: 1) **Explora el catálogo** para identificar las APIs que necesitas. 2) **Revisa la documentación** en el Visor Swagger para entender endpoints y esquemas. 3) **Prueba en el Sandbox** con datos de ejemplo. 4) **Obtén tu token** usando la API de Autenticación. 5) **Implementa** usando los ejemplos cURL como referencia.",
+    "relatedApiId": "",
+    "curlExample": ""
+  },
+  {
+    "id": "ai-016",
+    "keywords": ["vida", "seguro vida", "fallecimiento", "incapacidad", "beneficiario"],
+    "question": "¿Cómo emitir un seguro de vida?",
+    "answer": "Para emitir un seguro de vida, utiliza la **API de Emisión de Pólizas** con el plan de tipo vida. Debes proporcionar datos del asegurado, beneficiarios y el plan seleccionado (ej: 'vida-plus' con cobertura Muerte + Incapacidad). La API valida los datos y genera la póliza con certificado digital.",
+    "relatedApiId": "api-001",
+    "curlExample": "curl -X POST https://sandbox.segurosbolivar.com/v1/polizas/emitir -H 'Authorization: Bearer {token}' -H 'Content-Type: application/json' -d '{\"asegurado\": {\"nombre\": \"Juan Pérez\", \"documento\": \"1234567890\", \"tipoDocumento\": \"CC\", \"fechaNacimiento\": \"1985-03-15\"}, \"plan\": {\"codigo\": \"vida-plus\", \"cobertura\": \"Muerte + Incapacidad\"}, \"vigencia\": {\"inicio\": \"2024-07-01\"}}'"
+  }
+]

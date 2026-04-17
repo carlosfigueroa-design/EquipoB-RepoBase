@@ -1,0 +1,237 @@
+/**
+ * Mock: @seguros-bolivar/ui-bundle CSS
+ * Design System tokens y clases base para el Portal de APIs SIOP.
+ * Este archivo simula el bundle real del Design System corporativo.
+ */
+
+:root {
+  /* ── Brand Colors ── */
+  --sb-ui-color-primary: #003b7a;
+  --sb-ui-color-primary-light: #1a5fa8;
+  --sb-ui-color-primary-dark: #002a5c;
+  --sb-ui-color-secondary: #00a651;
+  --sb-ui-color-secondary-light: #33b873;
+  --sb-ui-color-accent: #f7941d;
+  --sb-ui-color-danger: #dc3545;
+  --sb-ui-color-warning: #ffc107;
+  --sb-ui-color-success: #28a745;
+  --sb-ui-color-info: #17a2b8;
+
+  /* ── Backgrounds ── */
+  --sb-ui-bg-primary: #f5f7fa;
+  --sb-ui-bg-secondary: #ffffff;
+  --sb-ui-bg-dark: #1a1a2e;
+  --sb-ui-bg-sidebar: #002a5c;
+
+  /* ── Text ── */
+  --sb-ui-text-primary: #1a1a2e;
+  --sb-ui-text-secondary: #6c757d;
+  --sb-ui-text-light: #ffffff;
+  --sb-ui-text-muted: #adb5bd;
+
+  /* ── Typography ── */
+  --sb-ui-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --sb-ui-font-size-xs: 0.75rem;
+  --sb-ui-font-size-sm: 0.875rem;
+  --sb-ui-font-size-md: 1rem;
+  --sb-ui-font-size-lg: 1.25rem;
+  --sb-ui-font-size-xl: 1.5rem;
+  --sb-ui-font-size-xxl: 2rem;
+
+  /* ── Spacing ── */
+  --sb-ui-spacing-xs: 4px;
+  --sb-ui-spacing-sm: 8px;
+  --sb-ui-spacing-md: 16px;
+  --sb-ui-spacing-lg: 24px;
+  --sb-ui-spacing-xl: 32px;
+
+  /* ── Borders ── */
+  --sb-ui-border-radius: 8px;
+  --sb-ui-border-radius-sm: 4px;
+  --sb-ui-border-radius-lg: 12px;
+  --sb-ui-border-color: #dee2e6;
+
+  /* ── Shadows ── */
+  --sb-ui-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --sb-ui-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --sb-ui-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Buttons ── */
+.sb-ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--sb-ui-border-radius);
+  font-family: var(--sb-ui-font-family);
+  font-size: var(--sb-ui-font-size-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  background-color: var(--sb-ui-color-primary);
+  color: var(--sb-ui-text-light);
+}
+
+.sb-ui-button:hover {
+  background-color: var(--sb-ui-color-primary-light);
+  box-shadow: var(--sb-ui-shadow-sm);
+}
+
+.sb-ui-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sb-ui-button--secondary {
+  background-color: var(--sb-ui-color-secondary);
+}
+
+.sb-ui-button--outline {
+  background-color: transparent;
+  border: 2px solid var(--sb-ui-color-primary);
+  color: var(--sb-ui-color-primary);
+}
+
+.sb-ui-button--danger {
+  background-color: var(--sb-ui-color-danger);
+}
+
+.sb-ui-button--sm {
+  padding: 6px 12px;
+  font-size: var(--sb-ui-font-size-sm);
+}
+
+/* ── Inputs ── */
+.sb-ui-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--sb-ui-border-color);
+  border-radius: var(--sb-ui-border-radius-sm);
+  font-family: var(--sb-ui-font-family);
+  font-size: var(--sb-ui-font-size-md);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: var(--sb-ui-bg-secondary);
+  color: var(--sb-ui-text-primary);
+}
+
+.sb-ui-input:focus {
+  outline: none;
+  border-color: var(--sb-ui-color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 59, 122, 0.15);
+}
+
+.sb-ui-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--sb-ui-border-color);
+  border-radius: var(--sb-ui-border-radius-sm);
+  font-family: var(--sb-ui-font-family);
+  font-size: var(--sb-ui-font-size-md);
+  resize: vertical;
+  min-height: 80px;
+}
+
+.sb-ui-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--sb-ui-border-color);
+  border-radius: var(--sb-ui-border-radius-sm);
+  font-family: var(--sb-ui-font-family);
+  font-size: var(--sb-ui-font-size-md);
+  background-color: var(--sb-ui-bg-secondary);
+  cursor: pointer;
+}
+
+/* ── Cards ── */
+.sb-ui-card {
+  background-color: var(--sb-ui-bg-secondary);
+  border-radius: var(--sb-ui-border-radius);
+  box-shadow: var(--sb-ui-shadow-sm);
+  padding: var(--sb-ui-spacing-lg);
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1px solid var(--sb-ui-border-color);
+}
+
+.sb-ui-card:hover {
+  box-shadow: var(--sb-ui-shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ── Table ── */
+.sb-ui-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sb-ui-font-family);
+}
+
+.sb-ui-table th,
+.sb-ui-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--sb-ui-border-color);
+}
+
+.sb-ui-table th {
+  background-color: var(--sb-ui-bg-primary);
+  font-weight: 600;
+  color: var(--sb-ui-text-primary);
+}
+
+.sb-ui-table tr:hover {
+  background-color: rgba(0, 59, 122, 0.04);
+}
+
+/* ── Badges ── */
+.sb-ui-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: var(--sb-ui-font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sb-ui-badge--success {
+  background-color: rgba(40, 167, 69, 0.12);
+  color: var(--sb-ui-color-success);
+}
+
+.sb-ui-badge--warning {
+  background-color: rgba(255, 193, 7, 0.15);
+  color: #856404;
+}
+
+.sb-ui-badge--danger {
+  background-color: rgba(220, 53, 69, 0.12);
+  color: var(--sb-ui-color-danger);
+}
+
+.sb-ui-badge--info {
+  background-color: rgba(0, 59, 122, 0.1);
+  color: var(--sb-ui-color-primary);
+}
+
+.sb-ui-badge--muted {
+  background-color: rgba(108, 117, 125, 0.12);
+  color: var(--sb-ui-text-secondary);
+}
+
+/* ── Spinner ── */
+.sb-ui-spinner {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--sb-ui-border-color);
+  border-top-color: var(--sb-ui-color-primary);
+  border-radius: 50%;
+  animation: sb-spin 0.7s linear infinite;
+}
+
+@keyframes sb-spin {
+  to { transform: rotate(360deg); }
+}

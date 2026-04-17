@@ -1,0 +1,24 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-009"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "radicado": "SIN-2024-009012",
+      "estado": "Radicado",
+      "polizaId": "POL-2024-001234",
+      "asegurado": {
+        "nombre": "Ana Lucía Torres Mendoza",
+        "documento": "5566778899"
+      },
+      "tipoSiniestro": "Daño a Vivienda",
+      "fechaEvento": "2024-07-10",
+      "descripcion": "Inundación por rotura de tubería principal",
+      "montoEstimado": 8500000,
+      "fechaRadicacion": "2024-07-11T09:30:00Z"
+    }
+  }
+}

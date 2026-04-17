@@ -1,0 +1,244 @@
+# Plan de Implementación: Portal de APIs Empresarial (SIOP) — MVP Hackathon
+
+## Visión General
+
+Plan de implementación para 5 personas trabajando en paralelo (~45 min cada una). Cada tarea top-level es independiente y asignable a una persona. Las sub-tareas dentro de cada bloque son secuenciales. Stack: Angular 19+ Standalone con `@seguros-bolivar/ui-bundle` (frontend) y Node.js 20.x + Express.js 4.x con TypeScript (backend). Persistencia con archivos JSON en `/data`. Todo mockeado: OTP "123456", respuestas IA pre-construidas, sandbox con respuestas predefinidas.
+
+## Tareas
+
+- [x] 1. Backend Core + Autenticación (Persona 1)
+  - [x] 1.1 Inicializar proyecto Express + TypeScript con estructura de carpetas
+    - Crear `backend/` con `package.json`, `tsconfig.json` y estructura: `src/config/`, `src/middleware/`, `src/controllers/`, `src/services/`, `src/routes/v1/`, `src/types/`
+    - Configurar dependencias: `express`, `cors`, `jsonwebtoken`, `uuid`, `typescript`, `ts-node`, `nodemon`
+    - Crear `src/app.ts` con configuración base de Express y registro de middleware
+    - Crear `src/config/app.config.ts` con paths de archivos JSON y constantes (JWT_SECRET, OTP fijo, puerto)
+    - _Requisitos: 3.1, 3.2, 7.1_
+  - [x] 1.2 Implementar JsonStoreService (lectura/escritura de archivos JSON desde /data)
+    - Crear `src/services/json-store.service.ts` con métodos `read<T>(fileName)`, `write<T>(fileName, data)`, `readSpec(specFileName)`, `readSandboxResponse(apiId, scenario)`
+    - Usar `fs/promises` para operaciones asíncronas sobre la carpeta `/data`
+    - Manejar errores de archivo no encontrado y JSON parse con mensajes descriptivos
+    - _Requisitos: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6_
+  - [x] 1.3 Implementar middleware stack (CORS, body-parser, correlation-id, error-handler)
+    - Crear `src/middleware/correlation-id.middleware.ts` que genera UUID y lo inyecta en header `X-Correlation-ID`
+    - Crear `src/middleware/error-handler.middleware.ts` con formato estándar `{error, message, correlationId, statusCode}`
+    - Configurar CORS con origin `http://localhost:4200` y `express.json()` en `app.ts`
+    - _Requisitos: 4.4, 6.2_
+  - [x] 1.4 Implementar AuthService (OTP mock "123456" + generación JWT con jsonwebtoken)
+    - Crear `src/services/auth.service.ts` con métodos `requestOtp(email)` y `verifyOtp(email, otp)`
+    - `requestOtp`: siempre retorna éxito `{message: "OTP enviado"}`
+    - `verifyOtp`: valida OTP === "123456", busca/crea usuario en `users.json` con rol "Externo" por defecto, genera JWT con `{userId, email, role}` usando `jsonwebtoken`
+    - Si email es `admin@segurosbolivar.com`, retorna rol "Admin" existente
+    - Rechazar OTP incorrecto con 401 y mensaje "Código inválido, intente nuevamente"
+    - _Requisitos: 3.1, 3.2, 3.3, 3.4, 3.5_
+  - [x] 1.5 Implementar auth.middleware.ts (verificación JWT)
+    - Crear `src/middleware/auth.middleware.ts` que extrae token del header `Authorization: Bearer {token}`
+    - Verificar firma JWT con `jsonwebtoken.verify()` y adjuntar `req.user` con `{userId, email, role}`
+    - Retornar 401 si token ausente, inválido o expirado
+    - _Requisitos: 1.5, 3.2_
+  - [x] 1.6 Implementar rutas de auth + controller (POST /otp/request, POST /otp/verify, GET /me)
+    - Crear `src/controllers/auth.controller.ts` con handlers para cada endpoint
+    - Crear `src/routes/v1/auth.routes.ts` con rutas: `POST /otp/request`, `POST /otp/verify`, `GET /me` (protegida con auth middleware)
+    - Crear `src/routes/v1/index.ts` que registra todas las rutas v1 con prefijo `/v1/api`
+    - Configurar en `app.ts` las rutas públicas (auth) antes del middleware de autenticación y las protegidas después
+    - _Requisitos: 3.1, 3.2, 3.4, 3.5_
+
+- [x] 2. Frontend Shell + Autenticación + Shared (Persona 2)
+  - [x] 2.1 Inicializar proyecto Angular 19+ con configuración de @seguros-bolivar/ui-bundle
+    - Crear proyecto Angular 19+ standalone en `frontend/` con `ng new` (sin NgModules)
+    - Instalar dependencias: `@seguros-bolivar/ui-bundle`, `swagger-ui-dist`
+    - Configurar `proxy.conf.json` para redirigir `/v1/api/*` a `http://localhost:3000`
+    - _Requisitos: 1.1, 2.2_
+  - [x] 2.2 Configurar angular.json (CSS/JS bundle) e index.html (data-brand/theme)
+    - En `angular.json`: agregar CSS del bundle como primer entry en `styles` y JS en `scripts`
+    - En `index.html`: agregar atributos `data-brand="seguros-bolivar"` y `data-theme="light"` en `<html>`
+    - Configurar `app.config.ts` con `provideRouter`, `provideHttpClient(withInterceptors([...]))`, `provideAnimations`
+    - _Requisitos: 1.1, 2.2_
+  - [x] 2.3 Crear estructura core/ (config, guards, interceptors, models, services)
+    - Crear `src/app/core/config/api.config.ts` con URLs base del backend (`/v1/api`)
+    - Crear modelos en `src/app/core/models/`: `api-catalog.model.ts`, `auth.model.ts`, `sandbox.model.ts` con las interfaces definidas en el diseño (ApiCatalogItem, ApiStatus, AuthSession, UserProfile, SandboxRequest, SandboxResponse, etc.)
+    - Crear `src/app/core/services/auth.service.ts` con métodos `requestOtp(email)`, `verifyOtp(email, otp)`, `getProfile()`, `isAuthenticated()`, `getToken()`, `logout()`
+    - _Requisitos: 3.1, 3.2, 1.1_
+  - [x] 2.4 Implementar auth.guard.ts, auth.interceptor.ts, correlation-id.interceptor.ts
+    - Crear `src/app/core/guards/auth.guard.ts` como `CanActivateFn` que verifica JWT en memoria y redirige a login si no autenticado
+    - Crear `src/app/core/interceptors/auth.interceptor.ts` como `HttpInterceptorFn` que inyecta header `Authorization: Bearer {token}`
+    - Crear `src/app/core/interceptors/correlation-id.interceptor.ts` que genera UUID y lo agrega como header `X-Correlation-ID`
+    - _Requisitos: 1.5, 3.2, 4.4_
+  - [x] 2.5 Implementar features/auth/ (login + OTP verify components)
+    - Crear `src/app/features/auth/login.component.ts` standalone con formulario de email usando clases `sb-ui-input` y `sb-ui-button`
+    - Crear `src/app/features/auth/otp-verify.component.ts` standalone con campo de código OTP, validación y mensaje de error
+    - Al verificar OTP exitosamente: almacenar JWT en memoria (AuthService), redirigir al catálogo
+    - Mostrar en `console.log` el código "123456" al solicitar OTP
+    - _Requisitos: 3.1, 3.2, 3.3_
+  - [x] 2.6 Implementar shared/ (header, sidebar, spinner) + app.routes.ts con lazy loading
+    - Crear `src/app/shared/components/header.component.ts` con logo, nombre del portal, menú de usuario (login/logout)
+    - Crear `src/app/shared/components/sidebar.component.ts` con navegación: Catálogo, Swagger, Sandbox, IA, Admin (solo si rol Admin)
+    - Crear `src/app/shared/components/loading-spinner.component.ts` con clase `sb-ui-spinner`
+    - Crear `src/app/app.routes.ts` con lazy loading (`loadComponent`) para todas las features, `authGuard` en rutas protegidas, `PreloadAllModules` y `withHashLocation()`
+    - Crear `src/app/app.component.ts` como shell con header, sidebar y `<router-outlet>`
+    - _Requisitos: 1.5, 3.2, 6.4_
+
+- [x] 3. Checkpoint — Verificar Backend Core y Frontend Shell
+  - Asegurar que el backend inicia correctamente en puerto 3000 con `npm run dev`
+  - Asegurar que el frontend inicia correctamente en puerto 4200 con `ng serve`
+  - Verificar que el flujo de login OTP funciona end-to-end (request → verify → JWT → redirect)
+  - Asegurar que las rutas protegidas redirigen a login sin JWT
+  - Si surgen preguntas, consultar con el equipo.
+
+- [x] 4. Catálogo Frontend + Backend (Persona 3)
+  - [x] 4.1 Backend: Implementar CatalogService (getPublicApis, search, getDetail, getSpec)
+    - Crear `backend/src/services/catalog.service.ts` con métodos:
+      - `getPublicApis()`: lee `apis.json`, filtra por estado "Publicada" y "Deprecada"
+      - `search(query)`: búsqueda case-insensitive por nombre, categoría o descripción
+      - `getPublicDetail(apiId)`: retorna detalle de API sin endpoints ni schemas de auth
+      - `getSpec(apiId)`: lee spec OpenAPI desde `/data/specs/{specFile}`
+    - Inyectar `JsonStoreService` para lectura de archivos JSON
+    - _Requisitos: 1.1, 1.2, 1.3, 1.4, 2.1, 2.5_
+  - [x] 4.2 Backend: Implementar catalog.controller.ts + catalog.routes.ts
+    - Crear `backend/src/controllers/catalog.controller.ts` con handlers para cada endpoint
+    - Crear `backend/src/routes/v1/catalog.routes.ts` con rutas:
+      - `GET /catalog` (público) — lista APIs publicadas
+      - `GET /catalog/search?q=` (público) — búsqueda
+      - `GET /catalog/:id` (público) — detalle público
+      - `GET /catalog/:id/spec` (protegido JWT) — spec OpenAPI completa
+    - Registrar rutas en `routes/v1/index.ts`
+    - _Requisitos: 1.1, 1.3, 1.4, 1.5, 2.1_
+  - [x] 4.3 Frontend: Implementar catalog.service.ts (HTTP client)
+    - Crear `frontend/src/app/core/services/catalog.service.ts` con métodos:
+      - `getPublicApis()`: GET `/v1/api/catalog`
+      - `searchApis(query)`: GET `/v1/api/catalog/search?q={query}`
+      - `getApiDetail(id)`: GET `/v1/api/catalog/{id}`
+      - `getApiSpec(id)`: GET `/v1/api/catalog/{id}/spec`
+    - Usar `HttpClient` inyectado (NO importar `HttpClientModule`)
+    - _Requisitos: 1.1, 1.3, 2.1_
+  - [x] 4.4 Frontend: Implementar catalog-list.component.ts (grid de cards con búsqueda)
+    - Crear `frontend/src/app/features/public-catalog/catalog-list.component.ts` standalone
+    - Grid de cards usando clases `sb-ui-card` con: nombre, categoría, ícono (Font Awesome), descripción resumida, badge de estado
+    - Campo de búsqueda con clase `sb-ui-input` que filtra en tiempo real en memoria (sin llamada al backend)
+    - Badge amarillo "Deprecada" para APIs deprecadas, ocultar APIs en estado "Borrador" y "Retirada"
+    - Click en card navega a detalle de API
+    - _Requisitos: 1.1, 1.2, 1.3, 6.3_
+  - [x] 4.5 Frontend: Implementar catalog-detail.component.ts (vista detalle de API)
+    - Crear `frontend/src/app/features/public-catalog/catalog-detail.component.ts` standalone
+    - Mostrar: nombre, categoría, descripción completa, casos de uso, equipo de contacto, versión, estado
+    - Botones de acción: "Ver Documentación" (navega a Swagger Viewer), "Probar en Sandbox" (navega a Sandbox) — ambos requieren autenticación
+    - Si usuario no autenticado hace clic, redirigir a login
+    - _Requisitos: 1.4, 1.5, 2.1_
+
+- [x] 5. Swagger Viewer + Sandbox Frontend + Backend (Persona 4)
+  - [x] 5.1 Backend: Implementar SandboxService (execute mock, historial en memoria)
+    - Crear `backend/src/services/sandbox.service.ts` con:
+      - `execute(request, userId)`: lee respuesta mock de `/data/sandbox-responses/{apiId}-{scenario}.json`, agrega `responseTimeMs` aleatorio (50-500ms) y `correlationId` UUID
+      - `getHistory(userId)`: retorna últimas 10 peticiones del usuario desde `Map<string, SandboxHistoryEntry[]>` en memoria
+    - Mantener historial en memoria con límite de 10 entradas por usuario (descartar más antiguas)
+    - _Requisitos: 4.1, 4.3, 4.4, 4.5_
+  - [x] 5.2 Backend: Implementar sandbox.controller.ts + sandbox.routes.ts
+    - Crear `backend/src/controllers/sandbox.controller.ts` con handlers
+    - Crear `backend/src/routes/v1/sandbox.routes.ts` con rutas protegidas (JWT):
+      - `POST /sandbox/execute` — ejecutar petición mock
+      - `GET /sandbox/history` — historial de peticiones
+    - Registrar rutas en `routes/v1/index.ts`
+    - _Requisitos: 4.1, 4.5_
+  - [x] 5.3 Frontend: Implementar swagger-viewer.component.ts (swagger-ui-dist embebido)
+    - Crear `frontend/src/app/features/swagger-viewer/swagger-viewer.component.ts` standalone
+    - Integrar `swagger-ui-dist` en un contenedor Angular usando `SwaggerUIBundle` en `ngAfterViewInit`
+    - Cargar spec OpenAPI desde el backend (`catalog.service.getApiSpec(id)`)
+    - Configurar `CUSTOM_ELEMENTS_SCHEMA` si necesario
+    - Renderizar endpoints, métodos HTTP, parámetros, schemas de request/response, códigos de respuesta
+    - _Requisitos: 2.1, 2.2, 2.3, 2.4_
+  - [x] 5.4 Frontend: Implementar sandbox.component.ts + request-builder + response-viewer
+    - Crear `frontend/src/app/features/sandbox/sandbox.component.ts` como contenedor principal
+    - Crear `frontend/src/app/features/sandbox/request-builder.component.ts` con:
+      - Selector de API, endpoint, método HTTP (GET/POST/PUT/DELETE)
+      - Editor de body JSON con datos de ejemplo pre-llenados
+      - Selector de escenario (200, 400, 404, 500)
+      - Botón "Ejecutar"
+    - Crear `frontend/src/app/features/sandbox/response-viewer.component.ts` con:
+      - Código HTTP con color (verde 2xx, amarillo 4xx, rojo 5xx)
+      - Headers de respuesta, body formateado JSON
+      - Tiempo de respuesta y Correlation-ID
+    - Mostrar historial de últimas 10 peticiones en panel lateral
+    - _Requisitos: 4.1, 4.2, 4.3, 4.4, 4.5_
+  - [x] 5.5 Frontend: Implementar sandbox.service.ts (HTTP client)
+    - Crear `frontend/src/app/core/services/sandbox.service.ts` con métodos:
+      - `execute(request)`: POST `/v1/api/sandbox/execute`
+      - `getHistory()`: GET `/v1/api/sandbox/history`
+    - Usar `HttpClient` inyectado
+    - _Requisitos: 4.1, 4.5_
+
+- [x] 6. Checkpoint — Verificar Catálogo, Swagger y Sandbox
+  - Asegurar que el catálogo muestra las APIs publicadas con búsqueda funcional
+  - Asegurar que el Swagger Viewer renderiza specs OpenAPI correctamente
+  - Asegurar que el Sandbox ejecuta peticiones mock y muestra respuestas con metadatos
+  - Verificar que el historial del sandbox mantiene las últimas 10 peticiones
+  - Si surgen preguntas, consultar con el equipo.
+
+- [x] 7. IA + Ciclo de Vida + Datos Mock (Persona 5)
+  - [x] 7.1 Crear todos los archivos JSON mock en /data
+    - Crear `data/apis.json` con 10 APIs del dominio asegurador (Emisión, Renovación, Siniestros x2, Cotización, Consulta Pólizas, Cancelación, Pagos, Autenticación, Notificaciones) con todos los campos: id, name, category, description, descriptionSummary, useCases, status, version, icon, contactTeam, specFile, createdAt, updatedAt
+    - Crear `data/users.json` con 2 usuarios: Admin (admin@segurosbolivar.com) y Externo (demo@segurosbolivar.com)
+    - Crear `data/specs/emision-polizas.json`, `data/specs/consulta-siniestros.json`, `data/specs/cotizacion-seguros.json` — specs OpenAPI 3.0 completas con endpoints, schemas, ejemplos y códigos de error
+    - Crear archivos en `data/sandbox-responses/` con respuestas mock para escenarios 200, 400, 404, 500 por API (mínimo 12 archivos)
+    - Crear `data/ai-responses.json` con 15+ pares keyword-respuesta del dominio asegurador
+    - Crear `data/audit-log.json` como arreglo vacío `[]`
+    - _Requisitos: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 2.5, 5.2_
+  - [x] 7.2 Backend: Implementar AIAssistantService (pattern matching por keywords)
+    - Crear `backend/src/services/ai-assistant.service.ts` con método `query(userMessage)`
+    - Leer `ai-responses.json`, tokenizar mensaje del usuario, contar coincidencias de keywords por cada respuesta
+    - Retornar la respuesta con mayor número de coincidencias, incluyendo: answer, relatedApiId, nombre de API, enlace al Swagger Viewer, ejemplo cURL
+    - Si no hay coincidencias, retornar mensaje genérico: "No encontré información específica sobre tu consulta..."
+    - _Requisitos: 5.1, 5.2, 5.3, 5.4_
+  - [x] 7.3 Backend: Implementar LifecycleService (createApi, changeStatus, auditLog)
+    - Crear `backend/src/services/lifecycle.service.ts` con métodos:
+      - `getAllApis()`: retorna todas las APIs (incluye Borrador/Retirada) para vista admin
+      - `createApi(data, userId)`: crea API con estado "Borrador", genera id único, persiste en `apis.json`
+      - `changeStatus(apiId, newStatus, userId)`: valida transiciones permitidas (Borrador→Publicada, Publicada→Deprecada, Deprecada→Retirada, Deprecada→Publicada), actualiza `apis.json`, registra en `audit-log.json`
+      - `getAuditLog(apiId)`: filtra entradas de `audit-log.json` por apiId
+    - Rechazar transiciones inválidas con 400 y mensaje "Transición no permitida de {anterior} a {nuevo}"
+    - _Requisitos: 6.1, 6.2, 6.3, 6.4, 6.5_
+  - [x] 7.4 Backend: Implementar controllers + routes para IA y lifecycle
+    - Crear `backend/src/controllers/ai.controller.ts` con handler para `POST /ai/assistant`
+    - Crear `backend/src/routes/v1/ai.routes.ts` (protegida JWT)
+    - Crear `backend/src/controllers/lifecycle.controller.ts` con handlers para:
+      - `GET /apis` (JWT+Admin) — lista todas las APIs
+      - `POST /apis` (JWT+Admin) — crear nueva API
+      - `PATCH /apis/:id/status` (JWT+Admin) — cambiar estado
+      - `GET /apis/:id/audit` (JWT+Admin) — log de auditoría
+    - Crear `backend/src/routes/v1/lifecycle.routes.ts` con validación de rol Admin en controller
+    - Registrar rutas en `routes/v1/index.ts`
+    - _Requisitos: 5.1, 6.1, 6.2, 6.5_
+  - [x] 7.5 Frontend: Implementar ai-chat.component.ts (chat con efecto de escritura)
+    - Crear `frontend/src/app/features/ai-assistant/ai-chat.component.ts` standalone
+    - Interfaz de chat con: campo de texto para consulta, botón enviar, historial de mensajes (usuario + asistente)
+    - Efecto de escritura progresiva (typing effect) en respuestas del asistente — mostrar caracteres uno a uno con `setInterval`
+    - Cuando la respuesta incluye API relacionada, mostrar enlace clickeable al Swagger Viewer y ejemplo cURL en bloque de código
+    - Crear `frontend/src/app/core/services/ai-assistant.service.ts` con método `query(message)`: POST `/v1/api/ai/assistant`
+    - _Requisitos: 5.1, 5.2, 5.3, 5.4, 5.5_
+  - [x] 7.6 Frontend: Implementar componentes de gestión de APIs (api-create, api-lifecycle)
+    - Crear `frontend/src/app/features/api-management/api-create.component.ts` standalone con formulario: nombre, categoría, descripción, casos de uso, equipo de contacto — usando clases `sb-ui-input`, `sb-ui-select`, `sb-ui-textarea`, `sb-ui-button`
+    - Crear `frontend/src/app/features/api-management/api-lifecycle.component.ts` standalone con:
+      - Tabla de todas las APIs (incluye Borrador/Retirada) usando clase `sb-ui-table`
+      - Badges de color por estado: gris (Borrador), verde (Publicada), amarillo (Deprecada), rojo (Retirada)
+      - Botones de acción para cambiar estado según transiciones permitidas
+      - Panel de log de auditoría por API
+    - Crear `frontend/src/app/core/services/lifecycle.service.ts` con métodos HTTP para los endpoints admin
+    - Solo accesible para usuarios con rol "Admin"
+    - _Requisitos: 6.1, 6.2, 6.3, 6.4, 6.5_
+
+- [x] 8. Checkpoint Final — Integración completa y demo
+  - Asegurar que todos los módulos están conectados y funcionan end-to-end
+  - Verificar flujo completo: login → catálogo → detalle → swagger → sandbox → IA → admin lifecycle
+  - Asegurar que el asistente IA responde con typing effect y enlaces funcionales
+  - Asegurar que el ciclo de vida registra auditoría correctamente
+  - Verificar que APIs deprecadas muestran badge amarillo y retiradas se ocultan del catálogo público
+  - Si surgen preguntas, consultar con el equipo.
+
+## Notas
+
+- Cada tarea top-level (1, 2, 4, 5, 7) es asignable a una persona y ejecutable en paralelo
+- Las sub-tareas dentro de cada bloque son secuenciales
+- Los checkpoints (3, 6, 8) son puntos de sincronización del equipo
+- Todas las tareas son obligatorias para el MVP — no hay tareas opcionales
+- Stack: TypeScript en ambos lados (Angular 19+ frontend, Node.js + Express backend)
+- Persistencia exclusiva con archivos JSON en `/data` — sin base de datos
+- Usar tokens CSS `--sb-ui-*` del design system, nunca hardcodear colores
+- Componentes Angular standalone con `CUSTOM_ELEMENTS_SCHEMA` donde se usen Web Components del bundle

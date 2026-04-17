@@ -1,0 +1,246 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API de Cotización de Seguros",
+    "version": "1.0.0",
+    "description": "API para generar cotizaciones de seguros en tiempo real. Calcula primas para productos de vida, auto, hogar y salud según perfil del solicitante y coberturas seleccionadas.",
+    "contact": {
+      "name": "Equipo Productos Digitales",
+      "email": "productos-digitales@segurosbolivar.com"
+    }
+  },
+  "servers": [
+    { "url": "https://sandbox.segurosbolivar.com/v1", "description": "Sandbox" }
+  ],
+  "paths": {
+    "/cotizaciones": {
+      "post": {
+        "summary": "Generar cotización de seguro",
+        "description": "Calcula la prima y genera una cotización para el producto y perfil indicados.",
+        "operationId": "generarCotizacion",
+        "tags": ["Cotización"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CotizacionRequest" },
+              "example": {
+                "producto": "auto",
+                "solicitante": {
+                  "nombre": "Carlos Andrés Martínez",
+                  "documento": "1122334455",
+                  "tipoDocumento": "CC",
+                  "fechaNacimiento": "1990-08-20",
+                  "ciudad": "Bogotá"
+                },
+                "vehiculo": {
+                  "marca": "Mazda",
+                  "modelo": "CX-5",
+                  "anio": 2023,
+                  "placa": "ABC123",
+                  "valorComercial": 120000000
+                },
+                "coberturas": ["todo-riesgo", "responsabilidad-civil", "asistencia-vial"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cotización generada exitosamente",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CotizacionResponse" },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "cotizacionId": "COT-2024-007890",
+                    "producto": "auto",
+                    "planes": [
+                      {
+                        "nombre": "Plan Básico",
+                        "primaAnual": 3200000,
+                        "primaMensual": 280000,
+                        "coberturas": ["responsabilidad-civil", "asistencia-vial"],
+                        "deducible": 2500000
+                      },
+                      {
+                        "nombre": "Plan Plus",
+                        "primaAnual": 4800000,
+                        "primaMensual": 420000,
+                        "coberturas": ["todo-riesgo", "responsabilidad-civil", "asistencia-vial"],
+                        "deducible": 1500000
+                      },
+                      {
+                        "nombre": "Plan Premium",
+                        "primaAnual": 6500000,
+                        "primaMensual": 565000,
+                        "coberturas": ["todo-riesgo", "responsabilidad-civil", "asistencia-vial", "auto-sustituto"],
+                        "deducible": 0
+                      }
+                    ],
+                    "validezHasta": "2024-08-15"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos inválidos en la solicitud",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "example": { "error": "VALIDATION_ERROR", "message": "El campo 'producto' es obligatorio", "statusCode": 400 }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno del servidor",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "example": { "error": "INTERNAL_ERROR", "message": "Error al calcular cotización", "statusCode": 500 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cotizaciones/{cotizacionId}": {
+      "get": {
+        "summary": "Consultar cotización",
+        "description": "Obtiene el detalle de una cotización generada previamente.",
+        "operationId": "consultarCotizacion",
+        "tags": ["Cotización"],
+        "parameters": [
+          {
+            "name": "cotizacionId",
+            "in": "path",
+            "required": true,
+            "description": "Identificador único de la cotización",
+            "schema": { "type": "string" },
+            "example": "COT-2024-007890"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalle de la cotización",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CotizacionResponse" }
+              }
+            }
+          },
+          "404": {
+            "description": "Cotización no encontrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "example": { "error": "NOT_FOUND", "message": "Cotización no encontrada", "statusCode": 404 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cotizaciones/productos": {
+      "get": {
+        "summary": "Listar productos disponibles",
+        "description": "Retorna los productos de seguros disponibles para cotización.",
+        "operationId": "listarProductos",
+        "tags": ["Cotización"],
+        "responses": {
+          "200": {
+            "description": "Lista de productos disponibles",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "data": [
+                    { "codigo": "auto", "nombre": "Seguro de Auto", "descripcion": "Protección integral para tu vehículo" },
+                    { "codigo": "vida", "nombre": "Seguro de Vida", "descripcion": "Protección para ti y tu familia" },
+                    { "codigo": "hogar", "nombre": "Seguro de Hogar", "descripcion": "Protección para tu vivienda y contenidos" },
+                    { "codigo": "salud", "nombre": "Seguro de Salud", "descripcion": "Cobertura médica complementaria" }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CotizacionRequest": {
+        "type": "object",
+        "required": ["producto", "solicitante"],
+        "properties": {
+          "producto": { "type": "string", "enum": ["auto", "vida", "hogar", "salud"], "description": "Tipo de producto a cotizar", "example": "auto" },
+          "solicitante": {
+            "type": "object",
+            "required": ["nombre", "documento", "tipoDocumento"],
+            "properties": {
+              "nombre": { "type": "string", "example": "Carlos Andrés Martínez" },
+              "documento": { "type": "string", "example": "1122334455" },
+              "tipoDocumento": { "type": "string", "enum": ["CC", "CE", "NIT", "PP"], "example": "CC" },
+              "fechaNacimiento": { "type": "string", "format": "date", "example": "1990-08-20" },
+              "ciudad": { "type": "string", "example": "Bogotá" }
+            }
+          },
+          "vehiculo": {
+            "type": "object",
+            "description": "Requerido para producto 'auto'",
+            "properties": {
+              "marca": { "type": "string", "example": "Mazda" },
+              "modelo": { "type": "string", "example": "CX-5" },
+              "anio": { "type": "integer", "example": 2023 },
+              "placa": { "type": "string", "example": "ABC123" },
+              "valorComercial": { "type": "number", "example": 120000000 }
+            }
+          },
+          "coberturas": {
+            "type": "array",
+            "items": { "type": "string" },
+            "example": ["todo-riesgo", "responsabilidad-civil"]
+          }
+        }
+      },
+      "CotizacionResponse": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "data": {
+            "type": "object",
+            "properties": {
+              "cotizacionId": { "type": "string", "example": "COT-2024-007890" },
+              "producto": { "type": "string" },
+              "planes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "nombre": { "type": "string" },
+                    "primaAnual": { "type": "number" },
+                    "primaMensual": { "type": "number" },
+                    "coberturas": { "type": "array", "items": { "type": "string" } },
+                    "deducible": { "type": "number" }
+                  }
+                }
+              },
+              "validezHasta": { "type": "string", "format": "date" }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string" },
+          "message": { "type": "string" },
+          "statusCode": { "type": "integer" }
+        }
+      }
+    }
+  }
+}

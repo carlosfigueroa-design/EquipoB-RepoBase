@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;e19af4a7b596e816baff58fdbc9f4791e292736f5704213f2e8c95f9f875834e;/Users/CristianDavidCarrenoRuiz/Desktop/Hackaton Vinculo/frontend/src/app/app.component.ts"],
+  "sourcesContent": ["\n    .app-shell {\n      display: flex;\n      flex-direction: column;\n      min-height: 100vh;\n    }\n\n    .app-body {\n      display: flex;\n      flex: 1;\n    }\n\n    .app-content {\n      flex: 1;\n      padding: var(--sb-ui-spacing-lg, 24px);\n      background-color: var(--sb-ui-bg-primary, #f5f7fa);\n      overflow-y: auto;\n    }\n  "],
+  "mappings": ";AACI,CAAC;AACC,WAAS;AACT,kBAAgB;AAChB,cAAY;AACd;AAEA,CAAC;AACC,WAAS;AACT,QAAM;AACR;AAEA,CAAC;AACC,QAAM;AACN,WAAS,IAAI,kBAAkB,EAAE;AACjC,oBAAkB,IAAI,kBAAkB,EAAE;AAC1C,cAAY;AACd;",
+  "names": []
+}

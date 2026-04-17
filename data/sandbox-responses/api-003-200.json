@@ -1,0 +1,28 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-003"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "radicado": "SIN-2024-005678",
+      "estado": "En Trámite",
+      "polizaId": "POL-2024-001234",
+      "asegurado": {
+        "nombre": "María García Rodríguez",
+        "documento": "9876543210"
+      },
+      "tipoSiniestro": "Accidente de Tránsito",
+      "fechaEvento": "2024-06-15",
+      "descripcion": "Colisión en intersección vial Calle 72 con Carrera 11",
+      "montoReclamado": 15000000,
+      "seguimiento": [
+        { "fecha": "2024-06-15", "estado": "Radicado", "detalle": "Siniestro radicado exitosamente" },
+        { "fecha": "2024-06-16", "estado": "En Revisión", "detalle": "Documentos en revisión por ajustador" },
+        { "fecha": "2024-06-18", "estado": "En Trámite", "detalle": "Peritaje programado para 2024-06-22" }
+      ]
+    }
+  }
+}

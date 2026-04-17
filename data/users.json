@@ -1,0 +1,16 @@
+[
+  {
+    "id": "user-001",
+    "email": "admin@segurosbolivar.com",
+    "displayName": "Administrador SIOP",
+    "role": "Admin",
+    "createdAt": "2024-01-01T00:00:00Z"
+  },
+  {
+    "id": "user-002",
+    "email": "demo@segurosbolivar.com",
+    "displayName": "Usuario Demo",
+    "role": "Externo",
+    "createdAt": "2024-01-01T00:00:00Z"
+  }
+]

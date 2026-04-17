@@ -1,0 +1,20 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-007"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "polizaId": "POL-2024-001234",
+      "renovacionId": "REN-2024-000456",
+      "estado": "Renovada",
+      "periodoAnterior": { "inicio": "2024-07-01", "fin": "2025-07-01" },
+      "periodoNuevo": { "inicio": "2025-07-01", "fin": "2026-07-01" },
+      "primaAnterior": 2450000,
+      "primaNueva": 2572500,
+      "ajuste": "5% incremento por IPC"
+    }
+  }
+}

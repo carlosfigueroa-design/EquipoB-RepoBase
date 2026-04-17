@@ -1,0 +1,28 @@
+/* Shared admin layout styles */
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.admin-header {
+  background-color: var(--sb-ui-color-primary, #003b7a);
+  color: var(--sb-ui-text-light, #ffffff);
+  padding: var(--sb-ui-spacing-md, 16px) var(--sb-ui-spacing-lg, 24px);
+  border-radius: var(--sb-ui-border-radius, 8px);
+  margin-bottom: var(--sb-ui-spacing-lg, 24px);
+}
+
+.admin-header .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.admin-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}

@@ -1,0 +1,12 @@
+{
+  "statusCode": 404,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-004"
+  },
+  "body": {
+    "error": "NOT_FOUND",
+    "message": "No se encontró siniestro con el radicado proporcionado",
+    "statusCode": 404
+  }
+}

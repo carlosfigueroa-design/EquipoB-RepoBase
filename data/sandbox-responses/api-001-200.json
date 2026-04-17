@@ -1,0 +1,28 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-001"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "polizaId": "POL-2024-001234",
+      "estado": "Emitida",
+      "asegurado": {
+        "nombre": "Juan Carlos Pérez López",
+        "documento": "1234567890",
+        "tipoDocumento": "CC"
+      },
+      "plan": {
+        "nombre": "Vida Plus",
+        "cobertura": "Muerte + Incapacidad",
+        "primaAnual": 2450000
+      },
+      "vigencia": {
+        "inicio": "2024-07-01",
+        "fin": "2025-07-01"
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-010"
+  },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "Datos incompletos para el registro del siniestro",
+    "statusCode": 400,
+    "details": [
+      { "field": "tipoSiniestro", "message": "Campo obligatorio" },
+      { "field": "fechaEvento", "message": "La fecha del evento no puede ser futura" }
+    ]
+  }
+}

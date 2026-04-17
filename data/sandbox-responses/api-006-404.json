@@ -1,0 +1,12 @@
+{
+  "statusCode": 404,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-012"
+  },
+  "body": {
+    "error": "NOT_FOUND",
+    "message": "No se encontró póliza con el número proporcionado",
+    "statusCode": 404
+  }
+}

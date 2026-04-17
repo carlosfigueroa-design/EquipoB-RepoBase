@@ -1,0 +1,16 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-002"
+  },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "El campo 'documento' del asegurado es obligatorio y debe tener entre 6 y 12 dígitos",
+    "statusCode": 400,
+    "details": [
+      { "field": "asegurado.documento", "message": "Campo obligatorio" },
+      { "field": "plan.codigo", "message": "El código de plan no es válido" }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "statusCode": 500,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-006"
+  },
+  "body": {
+    "error": "INTERNAL_ERROR",
+    "message": "Error interno al calcular la cotización. Por favor intente nuevamente.",
+    "statusCode": 500
+  }
+}

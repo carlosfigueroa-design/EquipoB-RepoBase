@@ -1,0 +1,32 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-011"
+  },
+  "body": {
+    "success": true,
+    "data": {
+      "polizaId": "POL-2024-001234",
+      "estado": "Vigente",
+      "producto": "Vida Plus",
+      "asegurado": {
+        "nombre": "Juan Carlos Pérez López",
+        "documento": "1234567890",
+        "tipoDocumento": "CC"
+      },
+      "cobertura": "Muerte + Incapacidad",
+      "primaAnual": 2450000,
+      "vigencia": { "inicio": "2024-07-01", "fin": "2025-07-01" },
+      "beneficiarios": [
+        { "nombre": "Laura Pérez Gómez", "parentesco": "Cónyuge", "porcentaje": 60 },
+        { "nombre": "Sofía Pérez Gómez", "parentesco": "Hija", "porcentaje": 40 }
+      ],
+      "pagos": {
+        "ultimoPago": "2024-06-01",
+        "proximoPago": "2024-07-01",
+        "estadoPago": "Al día"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "Content-Type": "application/json",
+    "X-Request-Id": "mock-req-008"
+  },
+  "body": {
+    "error": "VALIDATION_ERROR",
+    "message": "La póliza no está vigente o ya fue renovada para el período solicitado",
+    "statusCode": 400,
+    "details": [
+      { "field": "polizaId", "message": "Póliza no elegible para renovación" }
+    ]
+  }
+}
